@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Axios from 'axios';
 
-class App extends React.Component {
+class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      total: '',
+        total: '',
     }
     this.click = this.click.bind(this);
   }
@@ -19,7 +18,7 @@ class App extends React.Component {
       url: '/test'
     }).then(res => {
       let total = 0;
-      
+
       for(let i = 1; i < res.data.length; i++) {
         total += parseFloat(res.data[i]['__EMPTY_3']);
       }
@@ -29,7 +28,7 @@ class App extends React.Component {
     });
   }
 
-  render () {
+  render() {
     return (
       <div>
         <button onClick={() => { this.click()} }>TEST</button>
@@ -37,7 +36,7 @@ class App extends React.Component {
       </div>
     )
   }
+
 }
 
-
-export default App;
+export default Main;
