@@ -13,16 +13,15 @@ class LandingPage extends React.Component {
               <div className="inner">
                 <img className="logo" src={require('../../../dist/images/whitelogo.png')}></img>
                 <br/ ><br/ >
-                <h2>Merch Roadie</h2>
-                {/* <br/ > */}
+                <h2 id="title">Merch Roadie</h2>
                 <ul className="actions special">
-                  <form>
+                  <form id="title">
                     <label>
                       Email:
-                      <input className="login" type="text" name="email" />
+                      <input style={{width: 250}} className="login" type="text" name="email" />
                       Password:
                       <br /><input className="login" type="text" name="password" />
-                    </label>
+                    </label >
                       <br />
                       <input type="submit" value="login" />
                     </form>

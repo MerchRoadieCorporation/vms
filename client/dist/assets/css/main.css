@@ -3977,5 +3977,8 @@ input, select, textarea {
 
 	.login {
 		display: inline-block;
-		width: 200px;
+	}
+
+	#title {
+		font-family: 'Montserrat', sans-serif;
 	}
