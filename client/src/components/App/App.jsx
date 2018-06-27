@@ -4,8 +4,8 @@ import Main from '../Main/Main';
 import LandingPage from '../LandingPage/LandingPage';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {

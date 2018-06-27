@@ -25,6 +25,6 @@
   },
   "scripts": {
     "build": "webpack -w --config webpack.config.js",
-    "start": "npm install && node server/index.js"
+    "start": "npm install && nodemon server/index.js"
   }
 }
