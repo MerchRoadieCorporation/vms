@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
-const route = require('./routes/routes.js')
-
+const route = require('./routes/routes.js');
 
 let app = express();
 app.use(express.static(__dirname + '/../client/dist'));

@@ -1,14 +1,15 @@
 const jwt = require('../middleware/authentication');
-const firebase = require('firebase/app');
-const auth = require('firebase/auth');
+const firebase = require('firebase/app')
+const auth = require('firebase/auth')
 
 const authUser = (req, res) => {
   // let name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
+  console.log(email, password)
   // let arr = [name, email, password];
   // res.status(200).send(arr);
-  auth.signInWithEmailAndPassword(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
     .then((user) => {
       // console.log('User is signed in', user);
       const token = jwt.generateToken({ email });
