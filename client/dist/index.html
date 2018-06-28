@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Merch Roadie VMS</title>
+    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="landing is-preload">
+    <div id="app"></div>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <script>
+      const config = {
+        apiKey: "AIzaSyChFy8tksbphncOixvWePQWtJUxDp5e858",
+        authDomain: "merch-roadie.firebaseapp.com",
+        databaseURL: "https://merch-roadie.firebaseio.com",
+        projectId: "merch-roadie",
+        storageBucket: "merch-roadie.appspot.com",
+        messagingSenderId: "171492774266"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="./bundle.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
