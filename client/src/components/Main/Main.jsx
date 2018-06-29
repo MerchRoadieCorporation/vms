@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import swal from 'sweetalert2';
 import jwtDecode from 'jwt-decode';
 
 class Main extends React.Component {
@@ -31,6 +32,13 @@ class Main extends React.Component {
     console.log(axios.defaults.headers)
   }
 
+  logout() {
+        // Clear user token and profile data from localStorage
+        localStorage.removeItem('token');
+        swal({ text: 'You are now logged out.', showConfirmButton: false, timer: 1500});
+        this.props.history.replace('/');
+    }
+
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 
@@ -41,7 +49,7 @@ class Main extends React.Component {
         console.log('axios error=', err);
       })
     } else {
-      this.props.history.push('/login');
+      this.props.history.push('/');
     }
   }
 
@@ -49,7 +57,7 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={() => { this.click()} }>TEST</button>
+        <button onClick={() => { this.logout()} }>TEST</button>
         <div>{this.state.total}</div>
       </div>
     )
