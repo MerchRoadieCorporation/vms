@@ -1,5 +1,6 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 class Main extends React.Component {
   constructor() {
@@ -13,7 +14,7 @@ class Main extends React.Component {
   click() {
     const context = this;
 
-    Axios({
+    axios({
       method: 'post',
       url: '/test'
     }).then(res => {
@@ -27,6 +28,22 @@ class Main extends React.Component {
       this.setState({ total: finalTotal });
     });
   }
+
+  componentDidMount() {
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+
+    if (localStorage.getItem('token') !== 'null') {
+      axios({url: 'http://localhost:3000/main', method: 'get'}).then(data => {
+        console.log('IN AXIOS, data=', data);
+      }).catch(err => {
+        console.log('axios error=', err);
+      })
+    } else {
+      this.props.history.push('/login');
+    }
+
+  }
+
 
   render() {
     return (

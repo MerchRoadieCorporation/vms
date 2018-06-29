@@ -37,7 +37,7 @@ class LandingPage extends React.Component {
             swal({
               title: 'Signing In', type: 'success', showConfirmButton: false, timer: 1000,
             }).then(() => {
-              this.props.history.push('/username/profile');
+              this.props.history.push('/main');
             });
           }
         }).catch((err) => {
