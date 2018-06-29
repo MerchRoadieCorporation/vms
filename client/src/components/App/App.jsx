@@ -12,9 +12,9 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          <Route path="/main" component={Main} />
           <Route exact path="/" component={LandingPage} />
         </Switch>
+        <Route path="/main" component={Main} />
       </div>
     )
   }

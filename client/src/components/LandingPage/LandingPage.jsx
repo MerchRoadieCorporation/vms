@@ -10,45 +10,45 @@ class LandingPage extends React.Component {
     }
 
     async handleLoginSubmit(e) {
-        e.preventDefault();
-        const email = $('#InputEmail').val();
-        const password = $('#InputPassword').val();
-        const self = this;
+      e.preventDefault();
+      const email = $('#InputEmail').val();
+      const password = $('#InputPassword').val();
+      const self = this;
 
-        axios({
-          url: 'http://localhost:3000/login',
-          method: 'post',
-          data: {
-            email,
-            password,
-          },
-        }).then((res) => {
-          if (res.status === 204) {
-            swal({
-              title: 'Error', text: 'Double check email and password', type: 'error', showConfirmButton: false, timer: 1000,
-            }).then(() => {
-              $('#InputEmail').val('');
-              $('#InputPassword').val('');
-            });
-          } else {
-            localStorage.setItem('token', res.data.accessToken);
-            axios.defaults.headers.common['Authorization'] = res.data.accessToken;
-            console.log(axios.defaults.headers);
-            swal({
-              title: 'Signing In', type: 'success', showConfirmButton: false, timer: 1000,
-            }).then(() => {
-              this.props.history.push('/main');
-            });
-          }
-        }).catch((err) => {
+      axios({
+        url: 'http://localhost:3000/login',
+        method: 'post',
+        data: {
+          email,
+          password,
+        },
+      }).then((res) => {
+        if (res.status === 204) {
           swal({
-            title: 'Error', text: err, type: 'error', showConfirmButton: false, timer: 1000,
+            title: 'Error', text: 'Double check email and password', type: 'error', showConfirmButton: false, timer: 1000,
           }).then(() => {
             $('#InputEmail').val('');
             $('#InputPassword').val('');
           });
+        } else {
+          localStorage.setItem('token', res.data.accessToken);
+          axios.defaults.headers.common['Authorization'] = res.data.accessToken;
+          console.log(axios.defaults.headers);
+          swal({
+            title: 'Signing In', type: 'success', showConfirmButton: false, timer: 1000,
+          }).then(() => {
+            this.props.history.push('/main');
+          });
+        }
+      }).catch((err) => {
+        swal({
+          title: 'Error', text: err, type: 'error', showConfirmButton: false, timer: 1000,
+        }).then(() => {
+          $('#InputEmail').val('');
+          $('#InputPassword').val('');
         });
-      }
+      });
+   }
 
     render() {
       return (

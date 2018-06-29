@@ -3,8 +3,8 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
 class Main extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
         total: '',
     }
@@ -27,6 +27,8 @@ class Main extends React.Component {
       const finalTotal = total.toFixed(2);
       this.setState({ total: finalTotal });
     });
+
+    console.log(axios.defaults.headers)
   }
 
   componentDidMount() {
@@ -41,7 +43,6 @@ class Main extends React.Component {
     } else {
       this.props.history.push('/login');
     }
-
   }
 
 
