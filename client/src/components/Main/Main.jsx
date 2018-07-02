@@ -1,35 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import Menu from '../Menu/Menu'
 
 class Main extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
         total: '',
     }
-    this.click = this.click.bind(this);
-  }
-
-  click() {
-    const context = this;
-
-    axios({
-      method: 'post',
-      url: '/test'
-    }).then(res => {
-      let total = 0;
-
-      for(let i = 1; i < res.data.length; i++) {
-        total += parseFloat(res.data[i]['__EMPTY_3']);
-      }
-
-      const finalTotal = total.toFixed(2);
-      this.setState({ total: finalTotal });
-    });
-
-    console.log(axios.defaults.headers)
   }
 
   componentDidMount() {
@@ -46,12 +24,40 @@ class Main extends React.Component {
     }
   }
 
+  logout() {
+    // Clear user token and profile data from localStorage
+    localStorage.removeItem('token');
+    swal({ text: 'You are now logged out.', showConfirmButton: false, timer: 1500});
+    this.props.history.replace('/');
+    console.log('clicced')
+  }
+
 
   render() {
     return (
       <div>
-        <Menu />
-        <div>{this.state.total}</div>
+      <div id="page-wrapper">
+        <section id="banner">
+          <div className="inner">
+            <header id="header">
+              <h1 id="title">Merch Roadie</h1>
+              <nav id="nav">
+                <ul>
+                  <li className="special">
+                    <a href="#menu" className="menuToggle"><span>Menu</span></a>
+                    <div id="menu">
+                      <ul>
+                        <li>Sales</li>
+                        <li onClick={this.logout.bind(this)}>Logout</li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </header>
+          </div>
+        </section>
+      </div>
       </div>
     )
   }

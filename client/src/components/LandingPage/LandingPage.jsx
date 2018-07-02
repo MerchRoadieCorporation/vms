@@ -5,8 +5,8 @@ import swal from 'sweetalert2';
 import jwtDecode from 'jwt-decode';
 
 class LandingPage extends React.Component {
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
     }
 
     async handleLoginSubmit(e) {
@@ -56,8 +56,6 @@ class LandingPage extends React.Component {
           <div id="page-wrapper">
             <section id="banner">
               <div className="inner">
-                <img className="logo" src={require('../../../dist/images/whitelogo.png')}></img>
-                <br/ ><br/ >
                 <h2 id="title">Merch Roadie</h2>
                 <ul className="actions special">
                   <form id="title">
