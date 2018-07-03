@@ -27,9 +27,9 @@ class Main extends React.Component {
     }
 
     axios({
-      method: 'get',
+      method: 'post',
       url: '/sales',
-      data: email
+      data: localStorage.email
     }).then(res => {
       console.log(res);
     })
@@ -42,7 +42,6 @@ class Main extends React.Component {
     this.props.history.replace('/');
     console.log('clicced')
   }
-
 
   render() {
     return (
