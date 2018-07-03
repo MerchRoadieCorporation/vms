@@ -14,7 +14,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={ LandingPage } />
         </Switch>
-        <Route path="/main" component={ ()=> (<Main {...this.props} />) } />
+        <Route path="/main" component={ Main } />
       </div>
     )
   }
