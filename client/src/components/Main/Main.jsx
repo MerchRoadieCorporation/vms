@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import swal from 'sweetalert2';
 
 class Main extends React.Component {
   constructor() {
@@ -8,6 +9,7 @@ class Main extends React.Component {
     this.state = {
         total: '',
     }
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -24,8 +26,8 @@ class Main extends React.Component {
     }
   }
 
-  logout() {
-    // Clear user token and profile data from localStorage
+// Clear user token and profile data from localStorage
+  logout(e) {
     localStorage.removeItem('token');
     swal({ text: 'You are now logged out.', showConfirmButton: false, timer: 1500});
     this.props.history.replace('/');
@@ -36,28 +38,8 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-      <div id="page-wrapper">
-        <section id="banner">
-          <div className="inner">
-            <header id="header">
-              <h1 id="title">Merch Roadie</h1>
-              <nav id="nav">
-                <ul>
-                  <li className="special">
-                    <a href="#menu" className="menuToggle"><span>Menu</span></a>
-                    <div id="menu">
-                      <ul>
-                        <li>Sales</li>
-                        <li onClick={this.logout.bind(this)}>Logout</li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </nav>
-            </header>
-          </div>
-        </section>
-      </div>
+        <button>Sales</button>
+        <button onClick={this.logout}>Logout</button>
       </div>
     )
   }

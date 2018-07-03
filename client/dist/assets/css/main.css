@@ -3311,7 +3311,7 @@ input, select, textarea {
 			position: fixed;
 			top: 0;
 			width: 100%;
-			z-index: 10001;
+			/* z-index: 10001; */
 		}
 
 	#menu {
@@ -3334,7 +3334,7 @@ input, select, textarea {
 		right: 0;
 		top: 0;
 		width: 20em;
-		z-index: 10002;
+		/* z-index: 10002; */
 	}
 
 		#menu ul {
