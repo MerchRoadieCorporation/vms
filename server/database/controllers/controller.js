@@ -1,6 +1,10 @@
+const db = require('../index')
+
 module.exports = {
     sales: (req, res) => {
-      console.log(req);
-      res.send('YEEEE');
+      db.query('SELECT * FROM sales')
+        .then(data => {
+          res.send(data.rows[0])
+        })
     }
 }
