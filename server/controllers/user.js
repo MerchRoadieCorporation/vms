@@ -2,7 +2,7 @@ const jwt = require('../middleware/authentication');
 const firebase = require('./firebase.config')
 const auth = require('./firebase.config')
 
-
+//Authorize user through Firebase
 const authUser = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;

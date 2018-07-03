@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+//Create at JSON Web Token for logged in user
   generateToken: (email) => {
     const token = {};
 
@@ -12,6 +13,7 @@ module.exports = {
     return token;
   },
 
+//Verify user before redirecting to main page
   verifyUserWithJWT: (req, res, next) => {
     try {
       console.log(req)

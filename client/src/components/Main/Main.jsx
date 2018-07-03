@@ -4,15 +4,16 @@ import jwtDecode from 'jwt-decode';
 import swal from 'sweetalert2';
 
 class Main extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-        total: '',
+        sales: '',
     }
     this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
+    console.log(localStorage);
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 
     if (localStorage.getItem('token') !== 'null') {
@@ -24,6 +25,14 @@ class Main extends React.Component {
     } else {
       this.props.history.push('/');
     }
+
+    axios({
+      method: 'get',
+      url: '/sales',
+      data: email
+    }).then(res => {
+      console.log(res);
+    })
   }
 
 // Clear user token and profile data from localStorage
@@ -39,7 +48,7 @@ class Main extends React.Component {
     return (
       <div>
         <button>Sales</button>
-        <button onClick={this.logout}>Logout</button>
+        <button onClick={ this.logout }>Logout</button>
       </div>
     )
   }

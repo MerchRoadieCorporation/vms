@@ -5,10 +5,14 @@ import swal from 'sweetalert2';
 import jwtDecode from 'jwt-decode';
 
 class LandingPage extends React.Component {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
+      this.state = {
+          email: '',
+      }
     }
 
+//Login handler that goes through Firebase auth first, then creates JSON Web Token if valid login
     async handleLoginSubmit(e) {
       e.preventDefault();
       const email = $('#InputEmail').val();
@@ -32,8 +36,8 @@ class LandingPage extends React.Component {
           });
         } else {
           localStorage.setItem('token', res.data.accessToken);
+          localStorage.setItem('email', email);
           axios.defaults.headers.common['Authorization'] = res.data.accessToken;
-          console.log(axios.defaults.headers);
           swal({
             title: 'Signing In', type: 'success', showConfirmButton: false, timer: 1000,
           }).then(() => {
@@ -61,12 +65,12 @@ class LandingPage extends React.Component {
                   <form id="title">
                     <label>
                       Email:
-                      <input id="InputEmail" style={{width: 250}} className="login" type="text" name="email" />
+                      <input id="InputEmail" style={{ width: 250 }} className="login" type="text" name="email" />
                       Password:
-                      <br /><input id="InputPassword" style={{width: 250}} className="login" type="password" name="password" />
+                      <br /><input id="InputPassword" style={{ width: 250 }} className="login" type="password" name="password" />
                     </label >
                       <br />
-                      <input type="submit" value="login" onClick={this.handleLoginSubmit.bind(this)} />
+                      <input type="submit" value="login" onClick={ this.handleLoginSubmit.bind(this) } />
                     </form>
                 </ul>
               </div>
