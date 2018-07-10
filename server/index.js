@@ -4,6 +4,7 @@ const request = require('request');
 const router = require('./routes/routes.js');
 const cors = require('cors');
 const path = require('path')
+require('dotenv').config();
 
 let app = express();
 app.use(express.static(__dirname + '/../client/dist'));
