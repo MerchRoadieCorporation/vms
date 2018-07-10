@@ -8,7 +8,8 @@ class Main extends React.Component {
     super(props);
     this.state = {
         device: '',
-        total: ''
+        total: '',
+        numsold: '',
     }
     this.logout = this.logout.bind(this);
   }
@@ -25,17 +26,38 @@ class Main extends React.Component {
       this.props.history.push('/');
     }
 
-    axios({
-      method: 'post',
-      url: '/sales',
-      data: localStorage.email
-    }).then(res => {
-      console.log(res.data);
-      this.setState({
-        device: res.data.device,
-        total: res.data.numsold,
-      })
-    })
+    const self = this;
+
+    this.getSales = setInterval(function(){
+      axios({
+        method: 'post',
+        url: '/sales',
+        data: {
+          email: localStorage.email
+        }
+      }).then(res => {
+        console.log(res.data);
+
+        let device;
+        let total = 0;
+        let numsold = 0;
+
+        for(let i = 0; i < res.data.length; i++) {
+          device = res.data[i].device;
+          total += parseFloat(res.data[i].total);
+          numsold += res.data[i].numsold;
+        }
+
+        self.setState({
+          device: device,
+          total: total,
+          numsold: numsold,
+        })
+      }) }, 500);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.getSales);
   }
 
 // Clear user token and profile data from localStorage
@@ -51,7 +73,9 @@ class Main extends React.Component {
       <div>
         <button>Sales</button>
         <button onClick={ this.logout }>Logout</button>
-        {this.state.device} {this.state.total}
+        <h1>DEVICE = {this.state.device}</h1>
+        <h1>TOTAL = {this.state.total}</h1>
+        <h1>NUMSOLD = {this.state.numsold}</h1>
       </div>
     )
   }
