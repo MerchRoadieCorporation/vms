@@ -65,7 +65,6 @@ class Main extends React.Component {
     localStorage.removeItem('token');
     swal({ text: 'You are now logged out.', showConfirmButton: false, timer: 1500});
     this.props.history.replace('/');
-    console.log('clicced')
   }
 
   render() {
