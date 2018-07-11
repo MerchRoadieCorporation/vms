@@ -48,11 +48,13 @@ class Main extends React.Component {
       }).then(res => {
         console.log(res.data);
 
+
         let device;
-        let prevTotal = total
-        let prevNumsold = numsold
+        let prevTotal = x
         let total = add();
+        let prevNumsold = n
         let numsold = increment();
+
         // let total = 0;
         // let numsold = 0;
 
@@ -111,7 +113,7 @@ class Main extends React.Component {
             <br />
             <CountUp
               className="countup"
-              start={this.state.total}
+              start={this.state.prevTotal}
               end={this.state.total}
               useEasing={true}
               useGrouping={true}
@@ -122,7 +124,7 @@ class Main extends React.Component {
             <br />
             <CountUp
               className="countup"
-              start={this.state.numsold}
+              start={this.state.prevNumsold}
               end={this.state.numsold}
               useEasing={true}
               useGrouping={true}
