@@ -19,7 +19,7 @@
     "pg": "^7.4.3",
     "promise": "^8.0.1",
     "react": "^16.4.1",
-    "react-animated-number": "^0.4.4",
+    "react-countup": "^3.0.3",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
     "request": "^2.87.0",
