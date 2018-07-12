@@ -54,6 +54,7 @@ class Main extends React.Component {
     console.log('cliced LIVE SALES')
   }
 
+//Conditional rendering for sale button on onClick
   showAllSales() {
     if(this.state.showAllSales === false) {
       this.setState({

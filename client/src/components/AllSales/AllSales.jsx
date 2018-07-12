@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 class AllSales extends React.Component {
   constructor(props) {
@@ -32,8 +33,13 @@ class AllSales extends React.Component {
   render() {
     return (
       <div>
-      <h1>ALLL SALEZZZ</h1>
-      {this.state.sales}
+        <BootstrapTable className="salestable" data={this.state.sales} striped hover>
+          <TableHeaderColumn isKey dataField="machine">Machine</TableHeaderColumn>
+          <TableHeaderColumn dataField="total">Total Sale</TableHeaderColumn>
+          <TableHeaderColumn dataField="itemsSold" width="150">Items Sold</TableHeaderColumn>
+          <TableHeaderColumn dataField="date" width="200">Date</TableHeaderColumn>
+          <TableHeaderColumn dataField="time" width="200">Time</TableHeaderColumn>
+        </BootstrapTable>
       </div>
     )
   }
