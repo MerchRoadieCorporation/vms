@@ -1,7 +1,7 @@
 CREATE TABLE users (
   user_id       SERIAL PRIMARY KEY,
   email         VARCHAR(50),
-  card_reader   VARCHAR(50,
+  card_reader   VARCHAR(50),
 );
 
 CREATE TABLE sales (

@@ -33,7 +33,6 @@ componentDidMount() {
     }).then(res => {
       console.log(res.data);
 
-
       let device;
       let prevTotal = x
       let total = add();

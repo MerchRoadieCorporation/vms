@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 import swal from 'sweetalert2';
 import CountUp from 'react-countup';
 import LiveSales from '../LiveSales/LiveSales';
+import AllSales from '../AllSales/AllSales';
 
 class Main extends React.Component {
   constructor(props) {
@@ -46,12 +47,8 @@ class Main extends React.Component {
   showLiveSales() {
     if(this.state.showLiveSales === false) {
       this.setState({
+        showAllSales: false,
         showLiveSales: true,
-      })
-    } else {
-      this.setState({
-        showLiveSales: false,
-        showAllSales:false,
       })
     }
     console.log('cliced LIVE SALES')
@@ -60,12 +57,8 @@ class Main extends React.Component {
   showAllSales() {
     if(this.state.showAllSales === false) {
       this.setState({
-        showAllSales: true,
-      })
-    } else {
-      this.setState({
         showLiveSales: false,
-        showAllSales:false,
+        showAllSales: true,
       })
     }
     console.log('cliced ALL SALES')
