@@ -138,6 +138,7 @@ const getSales = auth => {
   });
 }
 
+// setInterval(function(){ authorize(clientJSON, getSales); }, 1000);
 authorize(clientJSON, getSales);
 
 module.exports = client;

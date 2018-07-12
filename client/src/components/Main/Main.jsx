@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import swal from 'sweetalert2';
 import CountUp from 'react-countup';
 import LiveSales from '../LiveSales/LiveSales';
-import AllSales from '../AllSales/AllSales';
+import SalesReports from '../SalesReports/SalesReports';
 
 class Main extends React.Component {
   constructor(props) {
@@ -16,11 +16,11 @@ class Main extends React.Component {
         prevNumsold: 0,
         numsold: 0,
         showLiveSales: false,
-        showAllSales: false,
+        showSalesReports: false,
     }
     this.logout = this.logout.bind(this);
     this.showLiveSales = this.showLiveSales.bind(this);
-    this.showAllSales = this.showAllSales.bind(this);
+    this.showSalesReports = this.showSalesReports.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +47,7 @@ class Main extends React.Component {
   showLiveSales() {
     if(this.state.showLiveSales === false) {
       this.setState({
-        showAllSales: false,
+        showSalesReports: false,
         showLiveSales: true,
       })
     }
@@ -55,11 +55,11 @@ class Main extends React.Component {
   }
 
 //Conditional rendering for sale button on onClick
-  showAllSales() {
-    if(this.state.showAllSales === false) {
+  showSalesReports() {
+    if(this.state.showSalesReports === false) {
       this.setState({
         showLiveSales: false,
-        showAllSales: true,
+        showSalesReports: true,
       })
     }
     console.log('cliced ALL SALES')
@@ -69,10 +69,10 @@ class Main extends React.Component {
     return (
       <div>
         <button onClick= {this.showLiveSales}>Live Sales</button>
-        <button onClick= {this.showAllSales}>All Sales</button>
+        <button onClick= {this.showSalesReports}>All Sales</button>
         <button id="logout" onClick={this.logout}>Logout</button>
           {this.state.showLiveSales ? <LiveSales /> : null}
-          {this.state.showAllSales ? <AllSales /> : null}
+          {this.state.showSalesReports ? <SalesReports /> : null}
       </div>
     )
   }

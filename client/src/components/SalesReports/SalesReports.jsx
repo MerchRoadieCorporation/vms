@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-class AllSales extends React.Component {
+class SalesReports extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,4 +46,4 @@ class AllSales extends React.Component {
 
 }
 
-export default AllSales;
+export default SalesReports;
