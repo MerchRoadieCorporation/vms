@@ -3,11 +3,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import swal from 'sweetalert2';
 import CountUp from 'react-countup';
-
-let x = 0
-const add = () => { x+= 20; return x }
-let n = 0
-const increment = () => { n++; return n; }
+import LiveSales from '../LiveSales/LiveSales';
 
 class Main extends React.Component {
   constructor(props) {
@@ -18,10 +14,12 @@ class Main extends React.Component {
         total: 0,
         prevNumsold: 0,
         numsold: 0,
-        showSales: false,
+        showLiveSales: false,
+        showAllSales: false,
     }
     this.logout = this.logout.bind(this);
-    this.showSales = this.showSales.bind(this);
+    this.showLiveSales = this.showLiveSales.bind(this);
+    this.showAllSales = this.showAllSales.bind(this);
   }
 
   componentDidMount() {
@@ -35,49 +33,6 @@ class Main extends React.Component {
     } else {
       this.props.history.push('/');
     }
-
-    const self = this;
-
-    this.getSales = setInterval(function(){
-      axios({
-        method: 'post',
-        url: '/sales',
-        data: {
-          email: localStorage.email
-        }
-      }).then(res => {
-        console.log(res.data);
-
-
-        let device;
-        let prevTotal = x
-        let total = add();
-        let prevNumsold = n
-        let numsold = increment();
-
-        // let total = 0;
-        // let numsold = 0;
-
-        for(let i = 0; i < res.data.length; i++) {
-          device = res.data[i].device;
-          total += parseFloat(res.data[i].total);
-          numsold += res.data[i].numsold;
-        }
-
-        console.log(total, numsold)
-
-        self.setState({
-          device: device,
-          prevTotal: prevTotal,
-          total: total,
-          prevNumsold: prevNumsold,
-          numsold: numsold,
-        })
-      }) }, 3000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.getSales);
   }
 
 // Clear user token and profile data from localStorage
@@ -88,51 +43,42 @@ class Main extends React.Component {
   }
 
 //Conditional rendering for sale button on onClick
-  showSales() {
-    if(this.state.showSales === false) {
+  showLiveSales() {
+    if(this.state.showLiveSales === false) {
       this.setState({
-        showSales: true,
+        showLiveSales: true,
       })
     } else {
       this.setState({
-        showSales: false,
+        showLiveSales: false,
+        showAllSales:false,
       })
     }
-    console.log('cliced')
+    console.log('cliced LIVE SALES')
+  }
+
+  showAllSales() {
+    if(this.state.showAllSales === false) {
+      this.setState({
+        showAllSales: true,
+      })
+    } else {
+      this.setState({
+        showLiveSales: false,
+        showAllSales:false,
+      })
+    }
+    console.log('cliced ALL SALES')
   }
 
   render() {
     return (
       <div>
-        <button onClick= {this.showSales}>Sales</button>
+        <button onClick= {this.showLiveSales}>Live Sales</button>
+        <button onClick= {this.showAllSales}>All Sales</button>
         <button id="logout" onClick={this.logout}>Logout</button>
-          {this.state.showSales ? <div id="title" className="machinesale">
-            <img className="machine" src={'../../../images/whitelogo.png'} />
-            <br /><br />
-            <h1 className="machinename">MR-2</h1>
-            <br />
-            <CountUp
-              className="countup"
-              start={this.state.prevTotal}
-              end={this.state.total}
-              useEasing={true}
-              useGrouping={true}
-              separator=","
-              decimals={2}
-              prefix="Total Sales: $"
-            />
-            <br />
-            <CountUp
-              className="countup"
-              start={this.state.prevNumsold}
-              end={this.state.numsold}
-              useEasing={true}
-              useGrouping={true}
-              separator=","
-              decimals={0}
-              prefix="Total Items Sold: "
-            />
-          </div> : null}
+          {this.state.showLiveSales ? <LiveSales /> : null}
+          {this.state.showAllSales ? <AllSales /> : null}
       </div>
     )
   }
