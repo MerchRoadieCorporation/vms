@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "keywords": [
-  "heroku"
+    "heroku"
   ],
   "dependencies": {
     "axios": "^0.17.1",
@@ -46,6 +46,6 @@
   },
   "scripts": {
     "build": "webpack -w --config webpack.config.js",
-    "start": "npm install && node server/index.js"
+    "start": "npm install && node server/index.js && npm run build"
   }
 }
