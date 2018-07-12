@@ -128,7 +128,32 @@ const getSales = auth => {
         const rows = res.data.values;
         if (rows.length) {
           rows.map((row) => {
-            console.log(`CARD_READER ${row[0]}, TOTAL_SALE ${row[4]}, NUM_SOLD ${row[6]}`);
+            let machine;
+            const cardReader = row[0];
+            const transaction = row[1];
+            const transactionType = row[2];
+            const cardNumber = row[3].slice(-4);
+            const totalSale = `$${row[4]}`;
+            const numSold = row[6];
+            const date = row[7];
+            const time = row[8];
+            console.log(fileIds)
+
+            if (cardReader === 'VJ300009789') {
+              machine = 'MR-1';
+            }
+            else if (cardReader === 'VJ500020986' || cardReader === 'VJ300009788') {
+              machine = 'MR-2';
+            }
+            else if (cardReader === 'VJ300015075') {
+              machine = 'MRM-1'
+            }
+
+
+
+
+            client.query(`INSERT INTO sales (transaction, machine, card_reader, payment_type, card_num, total_sale, num_sold, sale_date, sale_time) VALUES ('${transaction}', '${machine}', '${cardReader}', '${transactionType}', '${cardNumber}', '${totalSale}', '${numSold}', '${date}', '${time}')`)
+
           });
         } else {
           console.log('No data found.');

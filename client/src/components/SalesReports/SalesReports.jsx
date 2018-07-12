@@ -22,7 +22,7 @@ class SalesReports extends React.Component {
     }).then(res => {
       console.log(res.data);
 
-      const sales = []
+      const sales = res.data
 
       self.setState({
         sales: sales,
@@ -34,11 +34,13 @@ class SalesReports extends React.Component {
     return (
       <div>
         <BootstrapTable className="salestable" data={this.state.sales} striped hover>
-          <TableHeaderColumn isKey dataField="machine">Machine</TableHeaderColumn>
-          <TableHeaderColumn dataField="total">Total Sale</TableHeaderColumn>
-          <TableHeaderColumn dataField="itemsSold" width="150">Items Sold</TableHeaderColumn>
-          <TableHeaderColumn dataField="date" width="200">Date</TableHeaderColumn>
-          <TableHeaderColumn dataField="time" width="200">Time</TableHeaderColumn>
+          <TableHeaderColumn isKey dataField="machine">MR #</TableHeaderColumn>
+          <TableHeaderColumn dataField="total_sale">Total Sale</TableHeaderColumn>
+          <TableHeaderColumn dataField="num_sold">Items Sold</TableHeaderColumn>
+          <TableHeaderColumn dataField="payment_type">Payment Type</TableHeaderColumn>
+          <TableHeaderColumn dataField="card_num">Last 4 Digits of Card</TableHeaderColumn>
+          <TableHeaderColumn dataField="sale_date">Date</TableHeaderColumn>
+          <TableHeaderColumn dataField="sale_time">Time</TableHeaderColumn>
         </BootstrapTable>
       </div>
     )

@@ -69,7 +69,7 @@ class Main extends React.Component {
     return (
       <div>
         <button onClick= {this.showLiveSales}>Live Sales</button>
-        <button onClick= {this.showSalesReports}>All Sales</button>
+        <button onClick= {this.showSalesReports}>Sales Reports</button>
         <button id="logout" onClick={this.logout}>Logout</button>
           {this.state.showLiveSales ? <LiveSales /> : null}
           {this.state.showSalesReports ? <SalesReports /> : null}
