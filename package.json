@@ -46,6 +46,6 @@
   },
   "scripts": {
     "build": "webpack -w --config webpack.config.js",
-    "start": "nodemon server/index.js"
+    "start": "npm install && nodemon server/index.js"
   }
 }
