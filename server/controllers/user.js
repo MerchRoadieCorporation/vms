@@ -11,7 +11,6 @@ const authUser = (req, res) => {
       const token = jwt.generateToken(email);
       res.status(200).send(token);
     }, (err) => {
-      console.log('there was an error loggin in the user', err);
       res.status(204).send(err);
     });
 };

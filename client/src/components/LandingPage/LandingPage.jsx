@@ -70,7 +70,7 @@ class LandingPage extends React.Component {
                       <br /><input id="InputPassword" style={{ width: 250 }} className="login" type="password" name="password" />
                     </label >
                       <br />
-                      <input type="submit" value="login" onClick={ this.handleLoginSubmit.bind(this) } />
+                      <input type="submit" value="login" onClick={this.handleLoginSubmit.bind(this)} />
                     </form>
                 </ul>
               </div>

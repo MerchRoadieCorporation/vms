@@ -2,16 +2,25 @@ import React from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import swal from 'sweetalert2';
+import CountUp from 'react-countup';
+import LiveSales from '../LiveSales/LiveSales';
+import SalesReports from '../SalesReports/SalesReports';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
         device: '',
-        total: '',
-        numsold: '',
+        prevTotal: 0,
+        total: 0,
+        prevNumsold: 0,
+        numsold: 0,
+        showLiveSales: false,
+        showSalesReports: false,
     }
     this.logout = this.logout.bind(this);
+    this.showLiveSales = this.showLiveSales.bind(this);
+    this.showSalesReports = this.showSalesReports.bind(this);
   }
 
   componentDidMount() {
@@ -25,57 +34,45 @@ class Main extends React.Component {
     } else {
       this.props.history.push('/');
     }
-
-    const self = this;
-
-    this.getSales = setInterval(function(){
-      axios({
-        method: 'post',
-        url: '/sales',
-        data: {
-          email: localStorage.email
-        }
-      }).then(res => {
-        console.log(res.data);
-
-        let device;
-        let total = 0;
-        let numsold = 0;
-
-        for(let i = 0; i < res.data.length; i++) {
-          device = res.data[i].device;
-          total += parseFloat(res.data[i].total);
-          numsold += res.data[i].numsold;
-        }
-
-        self.setState({
-          device: device,
-          total: total,
-          numsold: numsold,
-        })
-      }) }, 500);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.getSales);
   }
 
 // Clear user token and profile data from localStorage
-  logout(e) {
+  logout() {
     localStorage.removeItem('token');
     swal({ text: 'You are now logged out.', showConfirmButton: false, timer: 1500});
     this.props.history.replace('/');
-    console.log('clicced')
+  }
+
+//Conditional rendering for sale button on onClick
+  showLiveSales() {
+    if(this.state.showLiveSales === false) {
+      this.setState({
+        showSalesReports: false,
+        showLiveSales: true,
+      })
+    }
+    console.log('cliced LIVE SALES')
+  }
+
+//Conditional rendering for sale button on onClick
+  showSalesReports() {
+    if(this.state.showSalesReports === false) {
+      this.setState({
+        showLiveSales: false,
+        showSalesReports: true,
+      })
+    }
+    console.log('cliced ALL SALES')
   }
 
   render() {
     return (
       <div>
-        <button>Sales</button>
-        <button onClick={ this.logout }>Logout</button>
-        <h1>DEVICE = {this.state.device}</h1>
-        <h1>TOTAL = {this.state.total}</h1>
-        <h1>NUMSOLD = {this.state.numsold}</h1>
+        <button onClick= {this.showLiveSales}>Live Sales</button>
+        <button onClick= {this.showSalesReports}>Sales Reports</button>
+        <button id="logout" onClick={this.logout}>Logout</button>
+          {this.state.showLiveSales ? <LiveSales /> : null}
+          {this.state.showSalesReports ? <SalesReports /> : null}
       </div>
     )
   }
