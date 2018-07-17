@@ -7,6 +7,7 @@ class SalesMRFilter extends React.Component {
     this.state = {
       machines: [],
     }
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -19,12 +20,20 @@ class SalesMRFilter extends React.Component {
         email: localStorage.email
       }
     }).then(res => {
+      const mrs = [];
       const machines = [];
 
       for(let i = 0; i < res.data.rows.length; i++) {
-        if(machines.indexOf(res.data.rows[i].machine) === -1) {
-          machines.push(res.data.rows[i].machine);
+        if(mrs.indexOf(res.data.rows[i].machine) === -1) {
+          mrs.push(res.data.rows[i].machine)
         }
+      }
+
+      for(let i = 0; i < mrs.length; i++) {
+        machines.push({
+          name: mrs[i],
+          checked: false,
+        });
       }
 
       self.setState({
@@ -33,17 +42,37 @@ class SalesMRFilter extends React.Component {
     })
   }
 
+  handleChange(value) {
+    const self = this;
+    const machine = value.target.value;
+    const machines = self.state.machines
+
+    for(let i = 0; i < machines.length; i++) {
+      if(machines[i].name === machine) {
+        machines[i].checked = !machines[i].checked;
+      }
+    }
+
+    console.log(machines)
+
+    self.setState({
+      machines: machines,
+    })
+
+  }
+
+
   render() {
     return (
       <div>
         <div className="salesfilter">
           <h1>Which Merch Roadies would you like to see sales for?</h1>
-            <ul>
-              {this.state.machines.map((machine, i) => {
-                return <li key={i}>{machine}</li>
-                })
-              }
-            </ul>
+            <form>
+            { this.state.machines.map((item, i) => {
+                return <label key={i}><input type="checkbox" key={i} checked={item.checked} value={item.name} onChange={this.handleChange} />{item.name}</label>
+              })
+            }
+            </form>
         </div>
       </div>
     )
