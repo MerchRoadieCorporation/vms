@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import SaleTimeFilter from '../SalesTimeFilter/SalesTimeFilter';
 
 class SalesMRFilter extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class SalesMRFilter extends React.Component {
       machines: [],
     }
     this.handleChange = this.handleChange.bind(this);
+    // this.selectAll = this.selectAll.bind(this);
   }
 
   componentDidMount() {
@@ -45,22 +47,33 @@ class SalesMRFilter extends React.Component {
   handleChange(value) {
     const self = this;
     const machine = value.target.value;
-    const machines = self.state.machines
+    const machines = self.state.machines;
 
     for(let i = 0; i < machines.length; i++) {
       if(machines[i].name === machine) {
         machines[i].checked = !machines[i].checked;
       }
     }
-
     console.log(machines)
-
     self.setState({
       machines: machines,
     })
-
   }
 
+  // selectAll() {
+  //   const self = this;
+  //   const machines = self.state.machines;
+  //
+  //   for(let i = 0; i < machines.length; i++) {
+  //     machines[i].checked = true
+  //   }
+  //
+  //   console.log(machines)
+  //
+  //   self.setState({
+  //     machines: machines,
+  //   })
+  // }
 
   render() {
     return (
@@ -73,6 +86,8 @@ class SalesMRFilter extends React.Component {
               })
             }
             </form>
+            <button onClick={this.props.showSalesTimeFilter} />
+            {this.state.showSalesTimeFilter ? <SalesTimeFilter /> : null}
         </div>
       </div>
     )
