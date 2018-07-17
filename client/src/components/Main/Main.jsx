@@ -15,12 +15,14 @@ class Main extends React.Component {
         total: 0,
         prevNumsold: 0,
         numsold: 0,
+        showMainButtons: true,
         showSalesReports: false,
         showSalesMRFilter: false,
         showSalesTimeFilter: false,
     }
     this.logout = this.logout.bind(this);
     this.showSalesReports = this.showSalesReports.bind(this);
+    this.returnToMain = this.returnToMain.bind(this);
   }
 
   componentDidMount() {
@@ -47,15 +49,22 @@ class Main extends React.Component {
     this.props.history.replace('/');
   }
 
-//Conditional rendering for sale button on onClick
+  returnToMain() {
+    this.setState({
+      showMainButtons: true,
+      showSalesReports: false,
+      showSalesMRFilter: false,
+      showSalesTimeFilter: false,
+    })
+  }
+
   showSalesReports() {
     if(this.state.showSalesReports === false) {
       this.setState({
-        showLiveSales: false,
+        showMainButtons: false,
         showSalesMRFilter: true,
       })
     }
-    console.log('cliced ALL SALES')
   }
 
   showSalesTimeFilter() {
@@ -65,17 +74,21 @@ class Main extends React.Component {
         showSalesMRFilter: false,
       })
     }
-    console.log('clicc')
   }
 
   render() {
     return (
       <div>
-        <button onClick= {this.showSalesReports}>Sales Reports</button>
+        {this.state.showMainButtons  ? <div className="mainbutton">
+        <button className="main" onClick= {this.showSalesReports}>Sales Reports</button>
+        <br /><br />
+        <button className="main">Manage Events</button>
+        </div> : null}
+        {!this.state.showMainButtons ? <button id="return" onClick={this.returnToMain}>Return to Main Page</button> : null}
         <button id="logout" onClick={this.logout}>Logout</button>
-          {this.state.showSalesMRFilter ? <SalesMRFilter showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
-          {this.state.showSalesTimeFilter ? <SalesTimeFilter /> : null}
-          {this.state.showSalesReports ? <SalesReports /> : null}
+        {this.state.showSalesMRFilter ? <SalesMRFilter showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
+        {this.state.showSalesTimeFilter ? <SalesTimeFilter /> : null}
+        {this.state.showSalesReports ? <SalesReports /> : null}
       </div>
     )
   }

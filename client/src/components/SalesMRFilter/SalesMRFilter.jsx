@@ -86,7 +86,7 @@ class SalesMRFilter extends React.Component {
               })
             }
             </form>
-            <button onClick={this.props.showSalesTimeFilter} />
+            <button onClick={this.props.showSalesTimeFilter}>Next</button>
             {this.state.showSalesTimeFilter ? <SalesTimeFilter /> : null}
         </div>
       </div>
