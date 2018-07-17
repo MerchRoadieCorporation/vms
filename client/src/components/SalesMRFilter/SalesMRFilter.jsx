@@ -37,7 +37,7 @@ class SalesMRFilter extends React.Component {
     return (
       <div>
         <div className="salesfilter">
-          <h2>Which Merch Roadies would you like to see sales for?</h2>
+          <h1>Which Merch Roadies would you like to see sales for?</h1>
             <ul>
               {this.state.machines.map((machine, i) => {
                 return <li key={i}>{machine}</li>

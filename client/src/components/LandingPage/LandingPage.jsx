@@ -39,14 +39,21 @@ class LandingPage extends React.Component {
           localStorage.setItem('email', email);
           axios.defaults.headers.common['Authorization'] = res.data.accessToken;
           swal({
-            title: 'Signing In', type: 'success', showConfirmButton: false, timer: 1000,
+            title: 'Signing In',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 1000,
           }).then(() => {
             this.props.history.push('/main');
           });
         }
       }).catch((err) => {
         swal({
-          title: 'Error', text: err, type: 'error', showConfirmButton: false, timer: 1000,
+          title: 'Error',
+          text: err,
+          type: 'error',
+          showConfirmButton: false,
+          timer: 1000,
         }).then(() => {
           $('#InputEmail').val('');
           $('#InputPassword').val('');
@@ -66,11 +73,13 @@ class LandingPage extends React.Component {
                     <label>
                       Email:
                       <input id="InputEmail" style={{ width: 250 }} className="login" type="text" name="email" />
+                      <br />
                       Password:
-                      <br /><input id="InputPassword" style={{ width: 250 }} className="login" type="password" name="password" />
+                      <br />
+                      <input id="InputPassword" style={{ width: 250 }} className="login" type="password" name="password" />
                     </label >
                       <br />
-                      <input type="submit" value="login" onClick={this.handleLoginSubmit.bind(this)} />
+                      <input type="submit" value="Login" onClick={this.handleLoginSubmit.bind(this)} />
                     </form>
                 </ul>
               </div>
