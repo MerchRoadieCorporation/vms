@@ -8,6 +8,9 @@ class SalesMRFilter extends React.Component {
   render() {
     return (
       <div>
+        <div className="salesfilter">
+          <h1>MR FILTER XD</h1>
+        </div>
       </div>
     )
   }

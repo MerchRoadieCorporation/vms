@@ -5,6 +5,8 @@ import swal from 'sweetalert2';
 import CountUp from 'react-countup';
 import LiveSales from '../LiveSales/LiveSales';
 import SalesReports from '../SalesReports/SalesReports';
+import SalesMRFilter from '../SalesMRFilter/SalesMRFilter';
+import SalesTimeFilter from '../SalesTimeFilter/SalesTimeFilter';
 
 class Main extends React.Component {
   constructor(props) {
@@ -17,6 +19,8 @@ class Main extends React.Component {
         numsold: 0,
         showLiveSales: false,
         showSalesReports: false,
+        showSalesMRFilter: false,
+        showSalesTimeFilter: false,
     }
     this.logout = this.logout.bind(this);
     this.showLiveSales = this.showLiveSales.bind(this);
@@ -59,7 +63,7 @@ class Main extends React.Component {
     if(this.state.showSalesReports === false) {
       this.setState({
         showLiveSales: false,
-        showSalesReports: true,
+        showSalesMRFilter: true,
       })
     }
     console.log('cliced ALL SALES')
@@ -72,6 +76,8 @@ class Main extends React.Component {
         <button onClick= {this.showSalesReports}>Sales Reports</button>
         <button id="logout" onClick={this.logout}>Logout</button>
           {this.state.showLiveSales ? <LiveSales /> : null}
+          {this.state.showSalesMRFilter ? <SalesMRFilter /> : null}
+          {this.state.showSalesTimeFilter ? <SalesTimeFilter /> : null}
           {this.state.showSalesReports ? <SalesReports /> : null}
       </div>
     )

@@ -3989,7 +3989,7 @@ input, select, textarea {
 		width: 25%;
 	}
 
-	.machinesale {
+	.machinesale, .salesfilter{
 		position: fixed;
 		top: 50%;
 		left: 50%;

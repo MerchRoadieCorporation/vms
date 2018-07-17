@@ -8,6 +8,7 @@ class SalesTimeFilter extends React.Component {
   render() {
     return (
       <div>
+      <h1>TIMEFILTER XD</h1>
       </div>
     )
   }
