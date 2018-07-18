@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import SalesReports from '../SalesReports/SalesReports';
 import SalesMRFilter from '../SalesMRFilter/SalesMRFilter';
 import SalesTimeFilter from '../SalesTimeFilter/SalesTimeFilter';
+import Calendar from '../Calendar/Calendar';
 
 class Main extends React.Component {
   constructor(props) {
@@ -18,11 +19,13 @@ class Main extends React.Component {
         showSalesReports: false,
         showSalesMRFilter: false,
         showSalesTimeFilter: false,
+        showCalendar: false,
     }
     this.logout = this.logout.bind(this);
     this.showSalesReports = this.showSalesReports.bind(this);
     this.returnToMain = this.returnToMain.bind(this);
     this.getMachines = this.getMachines.bind(this);
+    this.showCalendar = this.showCalendar.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +58,7 @@ class Main extends React.Component {
       showSalesReports: false,
       showSalesMRFilter: false,
       showSalesTimeFilter: false,
+      showCalendar: false,
     })
   }
 
@@ -76,6 +80,13 @@ class Main extends React.Component {
     }
   }
 
+  showCalendar() {
+    this.setState({
+      showSalesTimeFilter: false,
+      showCalendar: true,
+    })
+  }
+
   getMachines(machines) {
     this.setState({
       machines: machines,
@@ -93,8 +104,9 @@ class Main extends React.Component {
         {!this.state.showMainButtons ? <button id="return" onClick={this.returnToMain}>Return to Main Page</button> : null}
         <button id="logout" onClick={this.logout}>Logout</button>
         {this.state.showSalesMRFilter ? <SalesMRFilter sendMachines={this.getMachines} showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
-        {this.state.showSalesTimeFilter ? <SalesTimeFilter /> : null}
+        {this.state.showSalesTimeFilter ? <SalesTimeFilter showCalendar={this.showCalendar.bind(this)} /> : null}
         {this.state.showSalesReports ? <SalesReports /> : null}
+        {this.state.showCalendar ? <Calendar /> : null}
       </div>
     )
   }

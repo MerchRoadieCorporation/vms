@@ -11,7 +11,7 @@ class SalesMRFilter extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     // this.selectAll = this.selectAll.bind(this);
-    this.handleNoCheck = this.handleNoCheck.bind(this);
+    this.handleNext = this.handleNext.bind(this);
     this.sendMachines = this.sendMachines.bind(this);
   }
 
@@ -54,7 +54,7 @@ class SalesMRFilter extends React.Component {
         machines[i].checked = !machines[i].checked;
       }
     }
-    
+
     this.setState({
       machines: machines,
     })
@@ -72,7 +72,7 @@ class SalesMRFilter extends React.Component {
     this.props.sendMachines(mrArr);
   }
 
-  handleNoCheck() {
+  handleNext() {
     let bool = false;
 
     for(let i = 0; i < this.state.machines.length; i++) {
@@ -121,7 +121,7 @@ class SalesMRFilter extends React.Component {
               })
             }
             </form>
-            <button onClick={this.handleNoCheck}>Next</button>
+            <button onClick={this.handleNext}>Next</button>
         </div>
       </div>
     )
