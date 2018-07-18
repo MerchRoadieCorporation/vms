@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import SaleTimeFilter from '../SalesTimeFilter/SalesTimeFilter';
+import swal from 'sweetalert2';
 
 class SalesMRFilter extends React.Component {
   constructor(props) {
@@ -10,11 +11,10 @@ class SalesMRFilter extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     // this.selectAll = this.selectAll.bind(this);
+    this.handleNoCheck = this.handleNoCheck.bind(this);
   }
 
   componentDidMount() {
-    const self = this;
-
     axios({
       method: 'post',
       url: '/mrsales',
@@ -38,16 +38,15 @@ class SalesMRFilter extends React.Component {
         });
       }
 
-      self.setState({
+      this.setState({
         machines: machines,
       })
     })
   }
 
-  handleChange(value) {
-    const self = this;
-    const machine = value.target.value;
-    const machines = self.state.machines;
+  handleChange(e) {
+    const machine = e.target.value;
+    const machines = this.state.machines;
 
     for(let i = 0; i < machines.length; i++) {
       if(machines[i].name === machine) {
@@ -55,9 +54,31 @@ class SalesMRFilter extends React.Component {
       }
     }
     console.log(machines)
-    self.setState({
+    this.setState({
       machines: machines,
     })
+  }
+
+  handleNoCheck() {
+    let bool = false;
+
+    for(let i = 0; i < this.state.machines.length; i++) {
+      if(this.state.machines[i].checked === true) {
+        bool = true;
+      }
+    }
+
+    if(bool === false) {
+      swal({
+        type: 'error',
+        title: 'Error',
+        text: 'Please choose at least one Merch Roadie!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
+      this.props.showSalesTimeFilter()
+    }
   }
 
   // selectAll() {
@@ -82,11 +103,11 @@ class SalesMRFilter extends React.Component {
           <h1>Which Merch Roadies would you like to see sales for?</h1>
             <form>
             { this.state.machines.map((item, i) => {
-                return <label key={i}><input type="checkbox" key={i} checked={item.checked} value={item.name} onChange={this.handleChange} />{item.name}</label>
+                return <label key={i}><input type="checkbox" key={i} value={item.name} onChange={this.handleChange} />{item.name}</label>
               })
             }
             </form>
-            <button onClick={this.props.showSalesTimeFilter}>Next</button>
+            <button onClick={this.handleNoCheck}>Next</button>
             {this.state.showSalesTimeFilter ? <SalesTimeFilter /> : null}
         </div>
       </div>
