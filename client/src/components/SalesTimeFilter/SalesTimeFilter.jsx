@@ -1,4 +1,5 @@
 import React from 'react';
+import swal from 'sweetalert2';
 
 class SalesTimeFilter extends React.Component {
   constructor(props) {
@@ -6,6 +7,9 @@ class SalesTimeFilter extends React.Component {
     this.state = {
       time: false,
       event: false,
+      showSelections: true,
+      showTime: false,
+      showEvent: false,
     }
     this.handleNoCheck = this.handleNoCheck.bind(this);
     this.timeSelect = this.timeSelect.bind(this);
@@ -18,7 +22,7 @@ class SalesTimeFilter extends React.Component {
 
   handleNoCheck() {
     let bool = false;
-    console.log(this.state)
+    console.log(this.props)
 
     if((this.state.time === false) && (this.state.event === false)) {
       swal({
@@ -44,6 +48,8 @@ class SalesTimeFilter extends React.Component {
       time: false,
     })
   }
+
+
 
   render() {
     return (

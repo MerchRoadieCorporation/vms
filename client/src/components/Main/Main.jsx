@@ -11,10 +11,9 @@ class Main extends React.Component {
     super(props);
     this.state = {
         device: '',
-        prevTotal: 0,
-        total: 0,
-        prevNumsold: 0,
-        numsold: 0,
+        machines: [],
+        dates: [],
+        events: [],
         showMainButtons: true,
         showSalesReports: false,
         showSalesMRFilter: false,
@@ -23,6 +22,7 @@ class Main extends React.Component {
     this.logout = this.logout.bind(this);
     this.showSalesReports = this.showSalesReports.bind(this);
     this.returnToMain = this.returnToMain.bind(this);
+    this.getMachines = this.getMachines.bind(this);
   }
 
   componentDidMount() {
@@ -76,6 +76,12 @@ class Main extends React.Component {
     }
   }
 
+  getMachines(machines) {
+    this.setState({
+      machines: machines,
+    })
+  }
+
   render() {
     return (
       <div>
@@ -86,7 +92,7 @@ class Main extends React.Component {
         </div> : null}
         {!this.state.showMainButtons ? <button id="return" onClick={this.returnToMain}>Return to Main Page</button> : null}
         <button id="logout" onClick={this.logout}>Logout</button>
-        {this.state.showSalesMRFilter ? <SalesMRFilter showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
+        {this.state.showSalesMRFilter ? <SalesMRFilter sendMachines={this.getMachines} showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
         {this.state.showSalesTimeFilter ? <SalesTimeFilter /> : null}
         {this.state.showSalesReports ? <SalesReports /> : null}
       </div>
