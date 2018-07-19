@@ -4549,14 +4549,7 @@ th.react-bs-table-expand-cell > div {
 	 background-color: #f0f8ff !important;
 	 color: #4a90e2;
  }
+ 
  .Selectable .DayPicker-Day {
 	 border-radius: 0 !important;
- }
- .Selectable .DayPicker-Day--start {
-	 border-top-left-radius: 50% !important;
-	 border-bottom-left-radius: 50% !important;
- }
- .Selectable .DayPicker-Day--end {
-	 border-top-right-radius: 50% !important;
-	 border-bottom-right-radius: 50% !important;
  }

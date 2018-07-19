@@ -12,8 +12,8 @@ class Calendar extends React.Component {
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
     this.handleNext = this.handleNext.bind(this);
+    this.sendDates = this.sendDates.bind(this);
   }
-
 
   getInitialState() {
     this.setState({
@@ -31,25 +31,28 @@ class Calendar extends React.Component {
     this.setState(this.getInitialState());
   }
 
+  sendDates() {
+    let to;
+
+    if(this.state.to) {
+      to = this.state.to.toLocaleDateString();
+    }
+    const dates = [this.state.from.toLocaleDateString(), to]
+    this.props.sendDates(dates);
+  }
+
   handleNext() {
     if(this.state.from === undefined) {
       swal({
         type: 'error',
         title: 'Error',
-        text: 'Please choose a start date!',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    } else if(this.state.from && this.state.to === undefined) {
-      swal({
-        type: 'error',
-        title: 'Error',
-        text: 'Please choose an end date!',
+        text: 'Please choose a date!',
         showConfirmButton: false,
         timer: 1500
       })
     } else {
-      console.log(this.state.from.toLocaleDateString(), this.state.to.toLocaleDateString())
+        this.sendDates();
+        this.props.showFilteredSales();
     }
   }
 
@@ -60,8 +63,8 @@ class Calendar extends React.Component {
     <div>
       <div className="calendar">
         <p>
-          {!from && !to && 'Please select the first day.'}
-          {from && !to && 'Please select the last day.'}
+          {!from && !to && 'Please select a date.'}
+          {from && !to && '*Optional* Please select the last date.'}
           {from &&
             to &&
             `Selected from ${from.toLocaleDateString()} to

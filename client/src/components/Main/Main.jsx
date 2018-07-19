@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 import SalesReports from '../SalesReports/SalesReports';
 import SalesMRFilter from '../SalesMRFilter/SalesMRFilter';
 import SalesTimeFilter from '../SalesTimeFilter/SalesTimeFilter';
-import Calendar from '../Calendar/Calendar';
+import Calendar from '../SalesTimeFilter/Calendar';
 
 class Main extends React.Component {
   constructor(props) {
@@ -22,10 +22,13 @@ class Main extends React.Component {
         showCalendar: false,
     }
     this.logout = this.logout.bind(this);
-    this.showSalesReports = this.showSalesReports.bind(this);
+    this.showSalesMRFilter = this.showSalesMRFilter.bind(this);
+    this.showSalesTimeFilter = this.showSalesTimeFilter.bind(this);
+    this.showFilteredSales = this.showFilteredSales.bind(this);
+    this.showCalendar = this.showCalendar.bind(this);
     this.returnToMain = this.returnToMain.bind(this);
     this.getMachines = this.getMachines.bind(this);
-    this.showCalendar = this.showCalendar.bind(this);
+    this.getDates = this.getDates.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +44,6 @@ class Main extends React.Component {
     }
   }
 
-// Clear user token and profile data from localStorage
   logout() {
     localStorage.removeItem('token');
     swal({
@@ -62,8 +64,8 @@ class Main extends React.Component {
     })
   }
 
-  showSalesReports() {
-    if(this.state.showSalesReports === false) {
+  showSalesMRFilter() {
+    if(this.state.showSalesMRFilter === false) {
       this.setState({
         showMainButtons: false,
         showSalesMRFilter: true,
@@ -87,9 +89,23 @@ class Main extends React.Component {
     })
   }
 
+  showFilteredSales() {
+    this.setState({
+      showCalendar: false,
+      showSalesReports: true,
+    })
+  }
+
   getMachines(machines) {
     this.setState({
       machines: machines,
+    })
+  }
+
+  getDates(dates) {
+    console.log(dates)
+    this.setState({
+      dates: dates,
     })
   }
 
@@ -97,7 +113,7 @@ class Main extends React.Component {
     return (
       <div>
         {this.state.showMainButtons  ? <div className="mainbutton">
-        <button className="main" onClick= {this.showSalesReports}>Sales Reports</button>
+        <button className="main" onClick= {this.showSalesMRFilter}>Sales Reports</button>
         <br /><br />
         <button className="main">Manage Events</button>
         </div> : null}
@@ -106,7 +122,7 @@ class Main extends React.Component {
         {this.state.showSalesMRFilter ? <SalesMRFilter sendMachines={this.getMachines} showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
         {this.state.showSalesTimeFilter ? <SalesTimeFilter showCalendar={this.showCalendar.bind(this)} /> : null}
         {this.state.showSalesReports ? <SalesReports /> : null}
-        {this.state.showCalendar ? <Calendar /> : null}
+        {this.state.showCalendar ? <Calendar sendDates={this.getDates} showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
       </div>
     )
   }
