@@ -3975,6 +3975,10 @@ input, select, textarea {
 		text-align: center;
 	}
 
+	.gross {
+		text-align: center;
+	}
+
 	.main {
 		max-width: 100%;
 		width: 250px;
@@ -4549,7 +4553,7 @@ th.react-bs-table-expand-cell > div {
 	 background-color: #f0f8ff !important;
 	 color: #4a90e2;
  }
- 
+
  .Selectable .DayPicker-Day {
 	 border-radius: 0 !important;
  }

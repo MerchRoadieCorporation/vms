@@ -7,7 +7,10 @@ router.route('/login')
   .post(authUser);
 
 router.route('/main')
-  .get(jwt.verifyUserWithJWT, dbController.get);
+  .get(jwt.verifyUserWithJWT, dbController.mrSales);
+
+router.route('/mrsales')
+  .post(dbController.mrSales);
 
 router.route('/filteredsales')
   .post(dbController.filteredSales);

@@ -12,9 +12,9 @@ class Main extends React.Component {
     super(props);
     this.state = {
         device: '',
-        machines: [],
-        dates: [],
-        events: [],
+        machines: undefined,
+        dates: undefined,
+        events: undefined,
         showMainButtons: true,
         showSalesReports: false,
         showSalesMRFilter: false,
@@ -103,7 +103,6 @@ class Main extends React.Component {
   }
 
   getDates(dates) {
-    console.log(dates)
     this.setState({
       dates: dates,
     })
@@ -121,7 +120,7 @@ class Main extends React.Component {
         <button id="logout" onClick={this.logout}>Logout</button>
         {this.state.showSalesMRFilter ? <SalesMRFilter sendMachines={this.getMachines} showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
         {this.state.showSalesTimeFilter ? <SalesTimeFilter showCalendar={this.showCalendar.bind(this)} /> : null}
-        {this.state.showSalesReports ? <SalesReports /> : null}
+        {this.state.showSalesReports ? <SalesReports machines={this.state.machines} dates={this.state.dates} /> : null}
         {this.state.showCalendar ? <Calendar sendDates={this.getDates} showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
       </div>
     )
