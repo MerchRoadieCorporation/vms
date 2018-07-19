@@ -1,0 +1,1 @@
+insert into sales values (3, 'transaction', 'MR-3', 'cardreader', 'payment type', 'card-num', '50', 1, '10/4/2018', '12:00:00', 'brendan@brendan.com')
