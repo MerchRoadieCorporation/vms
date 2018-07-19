@@ -7,9 +7,9 @@ router.route('/login')
   .post(authUser);
 
 router.route('/main')
-  .get(jwt.verifyUserWithJWT, dbController.mrSales);
+  .get(jwt.verifyUserWithJWT, dbController.get);
 
-router.route('/mrsales')
-  .post(dbController.mrSales);
+router.route('/filteredsales')
+  .post(dbController.filteredSales);
 
   module.exports = router;
