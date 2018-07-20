@@ -72,11 +72,11 @@ class LandingPage extends React.Component {
                   <form id="title">
                     <label>
                       Email:
-                      <input id="InputEmail" style={{ width: 250 }} className="login" type="text" name="email" />
+                      <input id="InputEmail" style={{ width: 400 }} className="login" type="text" name="email" />
                       <br />
                       Password:
                       <br />
-                      <input id="InputPassword" style={{ width: 250 }} className="login" type="password" name="password" />
+                      <input id="InputPassword" style={{ width: 400 }} className="login" type="password" name="password" />
                     </label >
                       <br />
                       <input type="submit" value="Login" onClick={this.handleLoginSubmit.bind(this)} />
