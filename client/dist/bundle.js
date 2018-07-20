@@ -11625,7 +11625,7 @@ var LandingPage = function (_React$Component) {
       var self = this;
 
       (0, _axios2.default)({
-        url: 'http://localhost:3000/login',
+        url: '/login',
         method: 'post',
         data: {
           email: email,
