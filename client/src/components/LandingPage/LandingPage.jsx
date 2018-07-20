@@ -20,7 +20,7 @@ class LandingPage extends React.Component {
       const self = this;
 
       axios({
-        url: 'http://localhost:3000/login',
+        url: '/login',
         method: 'post',
         data: {
           email,
