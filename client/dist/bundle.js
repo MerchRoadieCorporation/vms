@@ -11695,11 +11695,11 @@ var LandingPage = function (_React$Component) {
                     'label',
                     null,
                     'Email:',
-                    _react2.default.createElement('input', { id: 'InputEmail', style: { width: 250 }, className: 'login', type: 'text', name: 'email' }),
+                    _react2.default.createElement('input', { id: 'InputEmail', style: { width: 300 }, className: 'login', type: 'text', name: 'email' }),
                     _react2.default.createElement('br', null),
                     'Password:',
                     _react2.default.createElement('br', null),
-                    _react2.default.createElement('input', { id: 'InputPassword', style: { width: 250 }, className: 'login', type: 'password', name: 'password' })
+                    _react2.default.createElement('input', { id: 'InputPassword', style: { width: 300 }, className: 'login', type: 'password', name: 'password' })
                   ),
                   _react2.default.createElement('br', null),
                   _react2.default.createElement('input', { type: 'submit', value: 'Login', onClick: this.handleLoginSubmit.bind(this) })
