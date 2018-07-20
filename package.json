@@ -48,6 +48,6 @@
   },
   "scripts": {
     "build": "webpack -w --config webpack.config.js",
-    "start": "nodemon server/index.js"
+    "start": "npm install && node server/index.js"
   }
 }
