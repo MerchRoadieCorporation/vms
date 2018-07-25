@@ -44,7 +44,11 @@ class LandingPage extends React.Component {
             showConfirmButton: false,
             timer: 1000,
           }).then(() => {
-            this.props.history.push('/main');
+            if(email === 'admin@merchroadie.com') {
+              this.props.history.push('/admin');
+            } else {
+              this.props.history.push('/main');
+            }
           });
         }
       }).catch((err) => {
