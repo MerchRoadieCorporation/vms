@@ -35,7 +35,7 @@ class Main extends React.Component {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 
     if (localStorage.getItem('token') !== 'null') {
-      axios({url: 'http://localhost:3000/main', method: 'get'}).then(data => {
+      axios({url: '/main', method: 'get'}).then(data => {
       }).catch(err => {
         throw err;
       })

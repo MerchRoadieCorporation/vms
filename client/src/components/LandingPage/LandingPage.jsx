@@ -17,7 +17,6 @@ class LandingPage extends React.Component {
       e.preventDefault();
       const email = $('#InputEmail').val();
       const password = $('#InputPassword').val();
-      const self = this;
 
       axios({
         url: '/login',
