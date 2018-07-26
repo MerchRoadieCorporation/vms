@@ -14,6 +14,9 @@ class EditEvent extends React.Component {
     axios({
       url: '/getevents',
       method: 'post',
+      data: {
+        email: localStorage.email,
+      }
     }).then(res => {
       this.setState({
         events: res.data.rows,

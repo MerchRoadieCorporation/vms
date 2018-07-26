@@ -9,8 +9,6 @@ module.exports = {
   },
 
   filteredSales: (req, res) => {
-    console.log(req.body)
-
     const machines = `{${req.body.machines.toString().slice(0, req.body.machines.toString().length)}}`
     const singleDateQuery = `SELECT * FROM sales WHERE email = '${req.body.email}'
     AND machine = ANY('${machines}'::text[])
@@ -31,5 +29,12 @@ module.exports = {
           res.send(data);
         })
     }
+  },
+
+  getEvents: (req, res) => {
+    db.query(`SELECT * FROM events WHERE email = '${req.body.email}'`)
+      .then(data => {
+        res.send(data);
+      })
   }
 }
