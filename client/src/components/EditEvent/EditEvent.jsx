@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-class ManageEvents extends React.Component {
+class EditEvent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     }
   }
 
@@ -17,4 +17,4 @@ class ManageEvents extends React.Component {
   }
 }
 
-export default ManageEvents;
+export default EditEvent;
