@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Main from '../Main/Main';
 import LandingPage from '../LandingPage/LandingPage';
+import Main from '../Main/Main';
+import AdminMain from '../AdminMain/AdminMain';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends React.Component {
           <Route exact path="/" component={ LandingPage } />
         </Switch>
         <Route path="/main" component={ Main } />
+        <Route path="/admin" component={ AdminMain } />
       </div>
     )
   }

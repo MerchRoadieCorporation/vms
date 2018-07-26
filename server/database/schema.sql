@@ -1,7 +1,6 @@
-CREATE TABLE users (
+CREATE TABLE clients (
   user_id       SERIAL PRIMARY KEY,
   email         VARCHAR(50),
-  card_reader   VARCHAR(50),
 );
 
 CREATE TABLE sales (
@@ -15,5 +14,15 @@ CREATE TABLE sales (
   num_sold      INT,
   sale_date     VARCHAR(50),
   sale_time     VARCHAR(50),
-  email         VARCHAR(50)
+  email         VARCHAR(50),
+);
+
+CREATE TABLE events (
+  event_id      SERIAL PRIMARY KEY,
+  name          VARCHAR(50),
+  start_date    VARCHAR(50),
+  end_date      VARCHAR(50),
+  start_time    VARCHAR(50),
+  end_time      VARCHAR(50),
+  email         VARCHAR(50),
 );

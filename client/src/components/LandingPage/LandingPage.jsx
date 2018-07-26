@@ -20,7 +20,7 @@ class LandingPage extends React.Component {
       const self = this;
 
       axios({
-        url: 'http://localhost:3000/login',
+        url: '/login',
         method: 'post',
         data: {
           email,
@@ -44,7 +44,11 @@ class LandingPage extends React.Component {
             showConfirmButton: false,
             timer: 1000,
           }).then(() => {
-            this.props.history.push('/main');
+            if(email === 'admin@merchroadie.com') {
+              this.props.history.push('/admin');
+            } else {
+              this.props.history.push('/main');
+            }
           });
         }
       }).catch((err) => {
@@ -72,11 +76,11 @@ class LandingPage extends React.Component {
                   <form id="title">
                     <label>
                       Email:
-                      <input id="InputEmail" style={{ width: 250 }} className="login" type="text" name="email" />
+                      <input id="InputEmail" style={{ width: 300 }} className="login" type="text" name="email" />
                       <br />
                       Password:
                       <br />
-                      <input id="InputPassword" style={{ width: 250 }} className="login" type="password" name="password" />
+                      <input id="InputPassword" style={{ width: 300 }} className="login" type="password" name="password" />
                     </label >
                       <br />
                       <input type="submit" value="Login" onClick={this.handleLoginSubmit.bind(this)} />
