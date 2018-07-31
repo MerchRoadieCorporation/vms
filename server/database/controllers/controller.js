@@ -36,5 +36,9 @@ module.exports = {
       .then(data => {
         res.send(data);
       })
+  },
+
+  createEvent: (req, res) => {
+    db.query(`INSERT INTO events(name, day, start_time, end_time, email) VALUES ('${req.body.name}', '${req.body.day}', '${req.body.startTime}', '${req.body.endTime}', '${req.body.email}')`)
   }
 }

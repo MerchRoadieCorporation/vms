@@ -18,4 +18,7 @@ router.route('/filteredsales')
 router.route('/getevents')
   .post(dbController.getEvents);
 
+router.route('/createevent')
+  .post(dbController.createEvent);
+
   module.exports = router;

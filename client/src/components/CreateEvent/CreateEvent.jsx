@@ -11,8 +11,8 @@ class CreateEvent extends React.Component {
     super(props);
     this.state = {
       date: null,
-      startTime: undefined,
-      endTime: undefined,
+      startTime: moment().hour(0).minute(0),
+      endTime: moment().hour(0).minute(0),
     }
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
@@ -36,20 +36,40 @@ class CreateEvent extends React.Component {
         showConfirmButton: false,
         timer: 1500
       })
+    } else if($('#EventName').val() === '') {
+      swal({
+        type: 'error',
+        title: 'Error',
+        text: 'Please enter an event name!',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } else {
-        console.log('click')
+      this.createEvent()
+      swal({
+        title: 'Event Created!',
+        type: 'success',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   }
 
   createEvent() {
-    let to;
-
-    if(this.state.to) {
-      to = this.state.to.toLocaleDateString();
-    }
-    const dates = [this.state.date.toLocaleDateString(), to]
     const name = $('#EventName').val();
     const email = localStorage.email;
+    axios({
+      method: 'post',
+      url: '/createevent',
+      data: {
+        name: name,
+        day: this.state.date.toLocaleDateString(),
+        startTime: moment(this.state.startTime, 'HH:mm'),
+        endTime: moment(this.state.endTime, 'HH.mm'),
+        email: email
+      }
+    })
+    console.log(moment(this.state.startTime).format('HH:mm'));
   }
 
   startTimeChange(startTime) {
@@ -65,8 +85,6 @@ class CreateEvent extends React.Component {
   }
 
   render() {
-    const format = 'h:mm a';
-    const now = moment().hour(0).minute(0);
     return (
       <div>
       <label><input id="EventName" style={{ width: 300 }} className="login" type="text" name="eventname" />Event Name:</label>
@@ -83,10 +101,9 @@ class CreateEvent extends React.Component {
           Start Time:
           <br /><TimePicker
             showSecond={false}
-            defaultValue={now}
-            className="xxx"
+            defaultValue={this.state.startTime}
             onChange={this.startTimeChange}
-            format={format}
+            format={'h:mm a'}
             use12Hours
             inputReadOnly
            />
@@ -94,10 +111,9 @@ class CreateEvent extends React.Component {
          End Time:
          <br /><TimePicker
            showSecond={false}
-           defaultValue={now}
-           className="xxx"
+           defaultValue={this.state.endTime}
            onChange={this.endTimeChange}
-           format={format}
+           format={'h:mm a'}
            use12Hours
            inputReadOnly
           /><br /><br />
