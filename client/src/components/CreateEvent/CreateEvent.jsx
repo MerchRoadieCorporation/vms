@@ -3,7 +3,8 @@ import axios from 'axios';
 import $ from 'jquery';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import swal from 'sweetalert2';
-
+import TimePicker from 'rc-time-picker';
+import moment from 'moment';
 
 class CreateEvent extends React.Component {
   constructor(props) {
@@ -11,11 +12,15 @@ class CreateEvent extends React.Component {
     this.state = {
       from: undefined,
       to: undefined,
+      startTime: undefined,
+      endTime: undefined,
     }
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
-    this.handleNext = this.handleNext.bind(this);
+    this.handleCreateEvent = this.handleCreateEvent.bind(this);
     this.createEvent = this.createEvent.bind(this);
+    this.startTimeChange = this.startTimeChange.bind(this);
+    this.endTimeChange = this.endTimeChange.bind(this);
   }
 
   getInitialState() {
@@ -34,17 +39,7 @@ class CreateEvent extends React.Component {
     this.setState(this.getInitialState());
   }
 
-  sendDates() {
-    let to;
-
-    if(this.state.to) {
-      to = this.state.to.toLocaleDateString();
-    }
-    const dates = [this.state.from.toLocaleDateString(), to]
-    this.props.sendDates(dates);
-  }
-
-  handleNext() {
+  handleCreateEvent() {
     if(this.state.from === undefined) {
       swal({
         type: 'error',
@@ -60,15 +55,36 @@ class CreateEvent extends React.Component {
   }
 
   createEvent() {
+    let to;
+
+    if(this.state.to) {
+      to = this.state.to.toLocaleDateString();
+    }
+    const dates = [this.state.from.toLocaleDateString(), to]
     const name = $('#EventName').val();
     const email = localStorage.email;
   }
 
+  startTimeChange(startTime) {
+    this.setState({
+      startTime: startTime,
+    })
+  }
+
+  endTimeChange(endTime) {
+    this.setState({
+      endTime: endTime,
+    })
+  }
+
   render() {
+    const format = 'h:mm a';
+    const now = moment().hour(0).minute(0);
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
     return (
       <div>
+      <label><input id="EventName" style={{ width: 300 }} className="login" type="text" name="eventname" />Event Name:</label>
         <div className="calendar">
           <p>
             {!from && !to && 'Please select a date.'}
@@ -91,7 +107,25 @@ class CreateEvent extends React.Component {
             modifiers={modifiers}
             onDayClick={this.handleDayClick}
           /><br />
-          <button onClick={this.handleNext}>Next</button>
+          Start Time:<br /><TimePicker
+            showSecond={false}
+            defaultValue={now}
+            className="xxx"
+            onChange={this.startTimeChange}
+            format={format}
+            use12Hours
+            inputReadOnly
+           /><br /><br />
+           End Time:<br /><TimePicker
+             showSecond={false}
+             defaultValue={now}
+             className="xxx"
+             onChange={this.endTimeChange}
+             format={format}
+             use12Hours
+             inputReadOnly
+            /><br /><br />
+          <button onClick={this.handleCreateEvent}>Create Event</button>
           </div>
       </div>
     )
