@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import swal from 'sweetalert2';
-import SalesReports from '../SalesReports/SalesReports';
-import SalesMRFilter from '../SalesMRFilter/SalesMRFilter';
-import SalesTimeFilter from '../SalesTimeFilter/SalesTimeFilter';
-import Calendar from '../SalesTimeFilter/Calendar';
-import EditEvents from '../EditEvents/EditEvents';
-import CreateEvent from '../CreateEvent/CreateEvent';
+import SalesReports from '../Client/SalesReports/SalesReports';
+import SalesMRFilter from '../Client/SalesMRFilter/SalesMRFilter';
+import SalesTimeFilter from '../Client/SalesTimeFilter/SalesTimeFilter';
+import Calendar from '../Client/SalesTimeFilter/Calendar';
+import EditEvents from '../Client/EditEvents/EditEvents';
+import CreateEvent from '../Client/CreateEvent/CreateEvent';
 
 class Main extends React.Component {
   constructor(props) {
@@ -68,6 +68,7 @@ class Main extends React.Component {
       showSalesTimeFilter: false,
       showCalendar: false,
       showEditEvents: false,
+      showCreateEvent: false,
     })
   }
 
