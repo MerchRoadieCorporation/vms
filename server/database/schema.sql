@@ -20,8 +20,7 @@ CREATE TABLE sales (
 CREATE TABLE events (
   event_id      SERIAL PRIMARY KEY,
   name          VARCHAR(50),
-  start_date    VARCHAR(50),
-  end_date      VARCHAR(50),
+  day           VARCHAR(50),
   start_time    VARCHAR(50),
   end_time      VARCHAR(50),
   email         VARCHAR(50),

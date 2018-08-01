@@ -43,6 +43,8 @@ class SalesTimeFilter extends React.Component {
       })
     } else if(this.state.time === true) {
       this.props.showCalendar();
+    } else if(this.state.event === true) {
+      this.props.showSalesEventFilter();
     }
   }
 

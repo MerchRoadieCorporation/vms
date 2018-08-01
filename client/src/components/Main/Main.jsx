@@ -2,10 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import swal from 'sweetalert2';
-import SalesReports from '../SalesReports/SalesReports';
-import SalesMRFilter from '../SalesMRFilter/SalesMRFilter';
-import SalesTimeFilter from '../SalesTimeFilter/SalesTimeFilter';
-import Calendar from '../SalesTimeFilter/Calendar';
+import SalesReports from '../Client/SalesReports/SalesReports';
+import SalesMRFilter from '../Client/SalesMRFilter/SalesMRFilter';
+import SalesTimeFilter from '../Client/SalesTimeFilter/SalesTimeFilter';
+import SalesEventFilter from '../Client/SalesEventFilter/SalesEventFilter';
+import Calendar from '../Client/SalesTimeFilter/Calendar';
+import EditEvents from '../Client/EditEvents/EditEvents';
+import CreateEvent from '../Client/CreateEvent/CreateEvent';
 
 class Main extends React.Component {
   constructor(props) {
@@ -19,13 +22,18 @@ class Main extends React.Component {
         showSalesReports: false,
         showSalesMRFilter: false,
         showSalesTimeFilter: false,
+        showSalesEventFilter: false,
         showCalendar: false,
+        showEditEvents: false,
+        showCreateEvent: false,
     }
     this.logout = this.logout.bind(this);
     this.showSalesMRFilter = this.showSalesMRFilter.bind(this);
     this.showSalesTimeFilter = this.showSalesTimeFilter.bind(this);
     this.showFilteredSales = this.showFilteredSales.bind(this);
     this.showCalendar = this.showCalendar.bind(this);
+    this.showEditEvents = this.showEditEvents.bind(this);
+    this.showCreateEvent = this.showCreateEvent.bind(this);
     this.returnToMain = this.returnToMain.bind(this);
     this.getMachines = this.getMachines.bind(this);
     this.getDates = this.getDates.bind(this);
@@ -35,7 +43,7 @@ class Main extends React.Component {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 
     if (localStorage.getItem('token') !== 'null') {
-      axios({url: 'http://localhost:3000/main', method: 'get'}).then(data => {
+      axios({url: '/main', method: 'get'}).then(data => {
       }).catch(err => {
         throw err;
       })
@@ -61,25 +69,30 @@ class Main extends React.Component {
       showSalesMRFilter: false,
       showSalesTimeFilter: false,
       showCalendar: false,
+      showEditEvents: false,
+      showCreateEvent: false,
     })
   }
 
   showSalesMRFilter() {
-    if(this.state.showSalesMRFilter === false) {
-      this.setState({
-        showMainButtons: false,
-        showSalesMRFilter: true,
-      })
-    }
+    this.setState({
+      showMainButtons: false,
+      showSalesMRFilter: true,
+    })
   }
 
   showSalesTimeFilter() {
-    if(this.state.showSalesTimeFilter === false) {
-      this.setState({
-        showSalesTimeFilter: true,
-        showSalesMRFilter: false,
-      })
-    }
+    this.setState({
+      showSalesTimeFilter: true,
+      showSalesMRFilter: false,
+    })
+  }
+
+  showSalesEventFilter() {
+    this.setState({
+      showSalesEventFilter: true,
+      showSalesTimeFilter: false,
+    })
   }
 
   showCalendar() {
@@ -93,6 +106,20 @@ class Main extends React.Component {
     this.setState({
       showCalendar: false,
       showSalesReports: true,
+    })
+  }
+
+  showEditEvents() {
+    this.setState({
+      showMainButtons: false,
+      showEditEvents: true,
+    })
+  }
+
+  showCreateEvent() {
+    this.setState({
+      showMainButtons: false,
+      showCreateEvent: true,
     })
   }
 
@@ -112,16 +139,21 @@ class Main extends React.Component {
     return (
       <div>
         {this.state.showMainButtons  ? <div className="mainbutton">
-        <button className="main" onClick= {this.showSalesMRFilter}>Sales Reports</button>
+        <button className="main" onClick={this.showSalesMRFilter}>Sales Reports</button>
         <br /><br />
-        <button className="main">Manage Events</button>
+        <button className="main" onClick={this.showEditEvents}>Edit Events</button>
+        <br /><br />
+        <button className="main" onClick={this.showCreateEvent}>Create Event</button>
         </div> : null}
         {!this.state.showMainButtons ? <button id="return" onClick={this.returnToMain}>Return to Main Page</button> : null}
         <button id="logout" onClick={this.logout}>Logout</button>
         {this.state.showSalesMRFilter ? <SalesMRFilter sendMachines={this.getMachines} showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
-        {this.state.showSalesTimeFilter ? <SalesTimeFilter showCalendar={this.showCalendar.bind(this)} /> : null}
+        {this.state.showSalesTimeFilter ? <SalesTimeFilter showCalendar={this.showCalendar.bind(this)} showSalesEventFilter={this.showSalesEventFilter.bind(this)} /> : null}
+        {this.state.showSalesEventFilter ? <SalesEventFilter showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
         {this.state.showSalesReports ? <SalesReports machines={this.state.machines} dates={this.state.dates} /> : null}
         {this.state.showCalendar ? <Calendar sendDates={this.getDates} showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
+        {this.state.showEditEvents ? <EditEvents /> : null}
+        {this.state.showCreateEvent ? <CreateEvent /> : null}
       </div>
     )
   }
