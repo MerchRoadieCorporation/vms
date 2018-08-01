@@ -5,9 +5,14 @@ class SalesEventFilter extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    
+  }
+
   render() {
     return (
       <div>
+      Sales Event Filter
       </div>
     )
   }

@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import SalesReports from '../Client/SalesReports/SalesReports';
 import SalesMRFilter from '../Client/SalesMRFilter/SalesMRFilter';
 import SalesTimeFilter from '../Client/SalesTimeFilter/SalesTimeFilter';
+import SalesEventFilter from '../Client/SalesEventFilter/SalesEventFilter';
 import Calendar from '../Client/SalesTimeFilter/Calendar';
 import EditEvents from '../Client/EditEvents/EditEvents';
 import CreateEvent from '../Client/CreateEvent/CreateEvent';
@@ -21,6 +22,7 @@ class Main extends React.Component {
         showSalesReports: false,
         showSalesMRFilter: false,
         showSalesTimeFilter: false,
+        showSalesEventFilter: false,
         showCalendar: false,
         showEditEvents: false,
         showCreateEvent: false,
@@ -73,21 +75,24 @@ class Main extends React.Component {
   }
 
   showSalesMRFilter() {
-    if(this.state.showSalesMRFilter === false) {
-      this.setState({
-        showMainButtons: false,
-        showSalesMRFilter: true,
-      })
-    }
+    this.setState({
+      showMainButtons: false,
+      showSalesMRFilter: true,
+    })
   }
 
   showSalesTimeFilter() {
-    if(this.state.showSalesTimeFilter === false) {
-      this.setState({
-        showSalesTimeFilter: true,
-        showSalesMRFilter: false,
-      })
-    }
+    this.setState({
+      showSalesTimeFilter: true,
+      showSalesMRFilter: false,
+    })
+  }
+
+  showSalesEventFilter() {
+    this.setState({
+      showSalesEventFilter: true,
+      showSalesTimeFilter: false,
+    })
   }
 
   showCalendar() {
@@ -143,7 +148,8 @@ class Main extends React.Component {
         {!this.state.showMainButtons ? <button id="return" onClick={this.returnToMain}>Return to Main Page</button> : null}
         <button id="logout" onClick={this.logout}>Logout</button>
         {this.state.showSalesMRFilter ? <SalesMRFilter sendMachines={this.getMachines} showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
-        {this.state.showSalesTimeFilter ? <SalesTimeFilter showCalendar={this.showCalendar.bind(this)} /> : null}
+        {this.state.showSalesTimeFilter ? <SalesTimeFilter showCalendar={this.showCalendar.bind(this)} showSalesEventFilter={this.showSalesEventFilter.bind(this)} /> : null}
+        {this.state.showSalesEventFilter ? <SalesEventFilter showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
         {this.state.showSalesReports ? <SalesReports machines={this.state.machines} dates={this.state.dates} /> : null}
         {this.state.showCalendar ? <Calendar sendDates={this.getDates} showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
         {this.state.showEditEvents ? <EditEvents /> : null}
