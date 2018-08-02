@@ -1,12 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import swal from 'sweetalert2';
 
 class SalesEventFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       events: [],
+      selectedEvent: undefined,
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleNext = this.handleNext.bind(this);
   }
 
   componentDidMount() {
@@ -38,27 +42,24 @@ class SalesEventFilter extends React.Component {
     })
   }
 
-  handleNext() {
-    // let bool = false;
-    //
-    // for(let i = 0; i < this.state.machines.length; i++) {
-    //   if(this.state.machines[i].checked === true) {
-    //     bool = true;
-    //   }
-    // }
-    //
-    // if(bool === false) {
-    //   swal({
-    //     type: 'error',
-    //     title: 'Error',
-    //     text: 'Please choose at least one event!',
-    //     showConfirmButton: false,
-    //     timer: 1500
-    //   })
-    // } else {
-    //   this.sendMachines();
-    //   this.props.showSalesTimeFilter();
-    // }
+  handleChange(e) {
+    this.setState({
+      selectedEvent: e.target.value,
+    })
+  }
+
+  handleNext() {    
+    if(!this.state.selectedEvent) {
+      swal({
+        type: 'error',
+        title: 'Error',
+        text: 'Please choose an event!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
+      console.log('yay')
+    }
   }
 
   render() {
@@ -68,7 +69,7 @@ class SalesEventFilter extends React.Component {
           <h1>Which events would you like to see sales for?</h1>
             <form>
             { this.state.events.map((item, i) => {
-                return <label key={i}><input type="checkbox" key={i} value={item.event.name} onChange={this.handleChange} />{item.event.name}</label>
+                return <label key={i}><input type="radio" key={i} value={item.event.name} onChange={this.handleChange} />{item.event.name}</label>
               })
             }
             </form>

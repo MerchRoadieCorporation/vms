@@ -10,7 +10,7 @@ class CreateEvent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: null,
+      date: undefined,
       startTime: moment().hour(0).minute(0),
       endTime: moment().hour(0).minute(0),
     }
@@ -45,13 +45,7 @@ class CreateEvent extends React.Component {
         timer: 1500
       })
     } else {
-      this.createEvent()
-      swal({
-        title: 'Event Created!',
-        type: 'success',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      this.createEvent();
     }
   }
 
@@ -69,8 +63,24 @@ class CreateEvent extends React.Component {
         endTime: moment(this.state.endTime, 'HH.mm'),
         email: email
       }
+    }).then(res => {
+      if(!res.data.rows[0].exists) {
+        swal({
+          title: 'Event Created!',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        swal({
+          title: 'Event name already exists!',
+          text: ' Please choose a different name.',
+          type: 'error',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     })
-    console.log(moment(this.state.startTime).format('HH:mm'));
   }
 
   startTimeChange(startTime) {

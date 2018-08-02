@@ -71,6 +71,7 @@ class Main extends React.Component {
       showCalendar: false,
       showEditEvents: false,
       showCreateEvent: false,
+      showSalesEventFilter: false,
     })
   }
 
