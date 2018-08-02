@@ -17,7 +17,7 @@ class SalesReports extends React.Component {
     if(this.props.machines && this.props.dates) {
       axios({
         method: 'post',
-        url: '/filteredsales',
+        url: '/filteredtimesales',
         data: {
           email: localStorage.email,
           machines: this.props.machines,

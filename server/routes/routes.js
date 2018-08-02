@@ -12,8 +12,11 @@ router.route('/main')
 router.route('/mrsales')
   .post(dbController.mrSales);
 
-router.route('/filteredsales')
-  .post(dbController.filteredSales);
+router.route('/filteredtimesales')
+  .post(dbController.filteredTimeSales);
+
+router.route('/filteredeventsales')
+  .post(dbController.filteredEventSales);
 
 router.route('/getevents')
   .post(dbController.getEvents);
