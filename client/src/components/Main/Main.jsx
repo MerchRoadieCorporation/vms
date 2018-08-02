@@ -6,7 +6,7 @@ import SalesReports from '../Client/SalesReports/SalesReports';
 import SalesMRFilter from '../Client/SalesMRFilter/SalesMRFilter';
 import SalesTimeFilter from '../Client/SalesTimeFilter/SalesTimeFilter';
 import SalesEventFilter from '../Client/SalesEventFilter/SalesEventFilter';
-import Calendar from '../Client/SalesTimeFilter/Calendar';
+import Calendar from '../Client/Calendar/Calendar';
 import EditEvents from '../Client/EditEvents/EditEvents';
 import CreateEvent from '../Client/CreateEvent/CreateEvent';
 

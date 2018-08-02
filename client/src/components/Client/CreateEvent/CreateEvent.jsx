@@ -58,6 +58,7 @@ class CreateEvent extends React.Component {
   createEvent() {
     const name = $('#EventName').val();
     const email = localStorage.email;
+    
     axios({
       method: 'post',
       url: '/createevent',
