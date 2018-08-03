@@ -7,7 +7,7 @@ import SalesMRFilter from '../Client/SalesMRFilter/SalesMRFilter';
 import SalesTimeFilter from '../Client/SalesTimeFilter/SalesTimeFilter';
 import SalesEventFilter from '../Client/SalesEventFilter/SalesEventFilter';
 import Calendar from '../Client/Calendar/Calendar';
-import EditEvents from '../Client/EditEvents/EditEvents';
+import ViewEditEvents from '../Client/ViewEditEvents/ViewEditEvents';
 import CreateEvent from '../Client/CreateEvent/CreateEvent';
 
 class Main extends React.Component {
@@ -24,7 +24,7 @@ class Main extends React.Component {
         showSalesTimeFilter: false,
         showSalesEventFilter: false,
         showCalendar: false,
-        showEditEvents: false,
+        showViewEditEvents: false,
         showCreateEvent: false,
     }
     this.logout = this.logout.bind(this);
@@ -32,7 +32,7 @@ class Main extends React.Component {
     this.showSalesTimeFilter = this.showSalesTimeFilter.bind(this);
     this.showFilteredSales = this.showFilteredSales.bind(this);
     this.showCalendar = this.showCalendar.bind(this);
-    this.showEditEvents = this.showEditEvents.bind(this);
+    this.showViewEditEvents = this.showViewEditEvents.bind(this);
     this.showCreateEvent = this.showCreateEvent.bind(this);
     this.returnToMain = this.returnToMain.bind(this);
     this.getMachines = this.getMachines.bind(this);
@@ -112,10 +112,10 @@ class Main extends React.Component {
     })
   }
 
-  showEditEvents() {
+  showViewEditEvents() {
     this.setState({
       showMainButtons: false,
-      showEditEvents: true,
+      showViewEditEvents: true,
     })
   }
 
@@ -150,7 +150,7 @@ class Main extends React.Component {
         {this.state.showMainButtons  ? <div className="mainbutton">
         <button className="main" onClick={this.showSalesMRFilter}>Sales Reports</button>
         <br /><br />
-        <button className="main" onClick={this.showEditEvents}>Edit Events</button>
+        <button className="main" onClick={this.showViewEditEvents}>View/Edit Events</button>
         <br /><br />
         <button className="main" onClick={this.showCreateEvent}>Create Event</button>
         </div> : null}
@@ -161,7 +161,7 @@ class Main extends React.Component {
         {this.state.showSalesEventFilter ? <SalesEventFilter showFilteredSales={this.showFilteredSales.bind(this)} sendEvent={this.getEvent} /> : null}
         {this.state.showSalesReports ? <SalesReports machines={this.state.machines} dates={this.state.dates} event={this.state.event} /> : null}
         {this.state.showCalendar ? <Calendar sendDates={this.getDates} showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
-        {this.state.showEditEvents ? <EditEvents /> : null}
+        {this.state.showViewEditEvents ? <ViewEditEvents /> : null}
         {this.state.showCreateEvent ? <CreateEvent /> : null}
       </div>
     )
