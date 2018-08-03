@@ -49,6 +49,10 @@ module.exports = {
   },
 
   filteredEventSales: (req, res) => {
-    console.log(req.body);
+    const machines = `{${req.body.machines.toString().slice(0, req.body.machines.toString().length)}}`
+
+    db.query(`SELECT * FROM sales WHERE email = '${req.body.email}'
+    AND machine = ANY('${machines}'::text[])
+    AND sale_date = '${req.body.date}' `)
   }
 }

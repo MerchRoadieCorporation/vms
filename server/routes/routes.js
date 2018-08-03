@@ -9,8 +9,11 @@ router.route('/login')
 router.route('/main')
   .get(jwt.verifyUserWithJWT, dbController.mrSales);
 
+// router.route('/allsales')
+//   .post(dbController.allSales);
+
 router.route('/mrsales')
-  .post(dbController.mrSales);
+  .post(dbController.mrSales)
 
 router.route('/filteredtimesales')
   .post(dbController.filteredTimeSales);

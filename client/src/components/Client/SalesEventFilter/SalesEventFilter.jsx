@@ -11,6 +11,7 @@ class SalesEventFilter extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleNext = this.handleNext.bind(this);
+    this.sendEvent = this.sendEvent.bind(this);
   }
 
   componentDidMount() {
@@ -29,26 +30,34 @@ class SalesEventFilter extends React.Component {
       }
 
       for(let i = 0; i < e.length; i++) {
-        events.push({
-          event: e[i],
-          checked: false,
-        });
+        events.push(e[i]);
       }
 
       this.setState({
         events: events,
       })
-      console.log(events)
     })
   }
 
   handleChange(e) {
+    let event;
+
+    for(let i = 0; i < this.state.events.length; i++) {
+      if(this.state.events[i].name === e.target.value) {
+        event = this.state.events[i];
+      }
+    }
+
     this.setState({
-      selectedEvent: e.target.value,
+      selectedEvent: event,
     })
   }
 
-  handleNext() {    
+  sendEvent() {
+    this.props.sendEvent(this.state.selectedEvent);
+  }
+
+  handleNext() {
     if(!this.state.selectedEvent) {
       swal({
         type: 'error',
@@ -58,7 +67,8 @@ class SalesEventFilter extends React.Component {
         timer: 1500
       })
     } else {
-      console.log('yay')
+      this.sendEvent();
+      this.props.showFilteredSales();
     }
   }
 
@@ -68,8 +78,8 @@ class SalesEventFilter extends React.Component {
         <div className="salesfilter">
           <h1>Which events would you like to see sales for?</h1>
             <form>
-            { this.state.events.map((item, i) => {
-                return <label key={i}><input type="radio" key={i} value={item.event.name} onChange={this.handleChange} />{item.event.name}</label>
+            { this.state.events.map((event, i) => {
+                return <label key={i}><input type="radio" name="events" key={i} value={event.name} onChange={this.handleChange} />{event.name}</label>
               })
             }
             </form>

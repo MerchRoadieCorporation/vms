@@ -17,7 +17,7 @@ class Main extends React.Component {
         device: '',
         machines: undefined,
         dates: undefined,
-        events: undefined,
+        event: undefined,
         showMainButtons: true,
         showSalesReports: false,
         showSalesMRFilter: false,
@@ -37,6 +37,7 @@ class Main extends React.Component {
     this.returnToMain = this.returnToMain.bind(this);
     this.getMachines = this.getMachines.bind(this);
     this.getDates = this.getDates.bind(this);
+    this.getEvent = this.getEvent.bind(this);
   }
 
   componentDidMount() {
@@ -106,6 +107,7 @@ class Main extends React.Component {
   showFilteredSales() {
     this.setState({
       showCalendar: false,
+      showSalesEventFilter: false,
       showSalesReports: true,
     })
   }
@@ -136,6 +138,12 @@ class Main extends React.Component {
     })
   }
 
+  getEvent(event) {
+    this.setState({
+      event: event,
+    })
+  }
+
   render() {
     return (
       <div>
@@ -150,8 +158,8 @@ class Main extends React.Component {
         <button id="logout" onClick={this.logout}>Logout</button>
         {this.state.showSalesMRFilter ? <SalesMRFilter sendMachines={this.getMachines} showSalesTimeFilter={this.showSalesTimeFilter.bind(this)} /> : null}
         {this.state.showSalesTimeFilter ? <SalesTimeFilter showCalendar={this.showCalendar.bind(this)} showSalesEventFilter={this.showSalesEventFilter.bind(this)} /> : null}
-        {this.state.showSalesEventFilter ? <SalesEventFilter showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
-        {this.state.showSalesReports ? <SalesReports machines={this.state.machines} dates={this.state.dates} /> : null}
+        {this.state.showSalesEventFilter ? <SalesEventFilter showFilteredSales={this.showFilteredSales.bind(this)} sendEvent={this.getEvent} /> : null}
+        {this.state.showSalesReports ? <SalesReports machines={this.state.machines} dates={this.state.dates} event={this.state.event} /> : null}
         {this.state.showCalendar ? <Calendar sendDates={this.getDates} showFilteredSales={this.showFilteredSales.bind(this)} /> : null}
         {this.state.showEditEvents ? <EditEvents /> : null}
         {this.state.showCreateEvent ? <CreateEvent /> : null}
