@@ -8,7 +8,7 @@ module.exports = {
       })
   },
 
-  filteredSales: (req, res) => {
+  filteredTimeSales: (req, res) => {
     const machines = `{${req.body.machines.toString().slice(0, req.body.machines.toString().length)}}`
     const singleDateQuery = `SELECT * FROM sales WHERE email = '${req.body.email}'
     AND machine = ANY('${machines}'::text[])
@@ -39,6 +39,20 @@ module.exports = {
   },
 
   createEvent: (req, res) => {
-    db.query(`INSERT INTO events(name, day, start_time, end_time, email) VALUES ('${req.body.name}', '${req.body.day}', '${req.body.startTime}', '${req.body.endTime}', '${req.body.email}')`)
+    db.query(`SELECT exists (SELECT 1 FROM events WHERE name = '${req.body.name}' LIMIT 1)`)
+      .then(data => { 
+        if(data.rows[0].exists === false) {
+          db.query(`INSERT INTO events(name, day, start_time, end_time, email) VALUES ('${req.body.name}', '${req.body.day}', '${req.body.startTime}', '${req.body.endTime}', '${req.body.email}')`)
+        }
+        res.send(data);
+      })
+  },
+
+  filteredEventSales: (req, res) => {
+    const machines = `{${req.body.machines.toString().slice(0, req.body.machines.toString().length)}}`
+
+    db.query(`SELECT * FROM sales WHERE email = '${req.body.email}'
+    AND machine = ANY('${machines}'::text[])
+    AND sale_date = '${req.body.date}' `)
   }
 }

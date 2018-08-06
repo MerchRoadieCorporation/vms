@@ -9,11 +9,17 @@ router.route('/login')
 router.route('/main')
   .get(jwt.verifyUserWithJWT, dbController.mrSales);
 
-router.route('/mrsales')
-  .post(dbController.mrSales);
+// router.route('/allsales')
+//   .post(dbController.allSales);
 
-router.route('/filteredsales')
-  .post(dbController.filteredSales);
+router.route('/mrsales')
+  .post(dbController.mrSales)
+
+router.route('/filteredtimesales')
+  .post(dbController.filteredTimeSales);
+
+router.route('/filteredeventsales')
+  .post(dbController.filteredEventSales);
 
 router.route('/getevents')
   .post(dbController.getEvents);

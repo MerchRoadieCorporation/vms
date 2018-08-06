@@ -17,7 +17,7 @@ class SalesReports extends React.Component {
     if(this.props.machines && this.props.dates) {
       axios({
         method: 'post',
-        url: '/filteredsales',
+        url: '/filteredtimesales',
         data: {
           email: localStorage.email,
           machines: this.props.machines,
@@ -38,11 +38,35 @@ class SalesReports extends React.Component {
           gross: gross,
         })
       })
+    } else if(this.props.event) {
+      axios({
+        method: 'post',
+        url: '/filteredeventsales',
+        data: {
+          email: localStorage.email,
+          machines: this.props.machines,
+          date: this.props.event.day,
+        }
+      }).then(res => {
+        console.log(res.data.rows)
+        const sales = [];
+        let gross = 0;
+
+        for(let i = 0; i < res.data.rows.length; i++) {
+          sales.push(res.data.rows[i]);
+          gross += parseFloat(res.data.rows[i].total_sale)
+        }
+
+        self.setState({
+          sales: sales,
+          gross: gross,
+        })
+      })
     }
 
     // axios({
     //   method: 'post',
-    //   url: '/sales',
+    //   url: '/allsales',
     //   data: {
     //     email: localStorage.email
     //   }

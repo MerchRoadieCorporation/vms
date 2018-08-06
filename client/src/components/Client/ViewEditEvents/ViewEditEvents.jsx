@@ -27,6 +27,10 @@ class EditEvent extends React.Component {
   render() {
     return (
       <div>
+        { this.state.events.map((event, i) => {
+              return <h1 key={i}>{event.name}</h1>
+            })
+          }
       </div>
     )
   }
